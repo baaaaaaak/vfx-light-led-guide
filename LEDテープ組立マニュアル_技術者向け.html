@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>LEDテープ 5本構成 技術者向けマニュアル</title>
+<style>
+  @page { size: A4; margin: 13mm 13mm 13mm 13mm; }
+  :root { --ink:#1a1a1a; --sub:#555; --line:#c9c9c9; --plus:#c62828; --minus:#37474f; --data:#2e7d32; --warn:#b26a00; --bg:#f6f6f4; --step:#1f5fa8; }
+  * { box-sizing: border-box; }
+  body { font-family: "Yu Gothic UI","Yu Gothic","Meiryo",sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.6; margin: 0; }
+  rt { font-size: 55%; }
+  h1 { font-size: 17pt; margin: 0 0 2mm; }
+  .lead { color: var(--sub); margin: 0 0 4mm; font-size: 11pt; }
+  h2 { font-size: 13pt; margin: 6mm 0 2mm; padding-bottom: 1mm; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 13pt; margin: 4mm 0 1mm; }
+  .step { border: 2px solid var(--step); border-radius: 3mm; padding: 3mm 4mm; margin: 4mm 0; break-inside: avoid; }
+  .step > .num { display: inline-block; background: var(--step); color: #fff; font-weight: 700; border-radius: 2mm; padding: 0 3mm; margin-right: 2mm; }
+  .step > .title { font-weight: 700; font-size: 13pt; }
+  .done { text-align: right; font-weight: 700; color: var(--step); margin-top: 1mm; }
+  .note { background: var(--bg); border-left: 5px solid var(--ink); padding: 2.5mm 4mm; margin: 3mm 0; break-inside: avoid; }
+  .warn { border-left-color: var(--warn); background: #fff6e8; }
+  .warn b { color: var(--warn); }
+  .adult { border: 2px dashed var(--warn); border-radius: 3mm; padding: 2mm 4mm; margin: 3mm 0; background: #fffaf0; break-inside: avoid; }
+  .adult::before { content: "おとなの人と いっしょに"; display: block; font-weight: 700; color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  th, td { border: 1px solid var(--line); padding: 1.5mm 2.5mm; text-align: left; vertical-align: top; }
+  th { background: var(--bg); font-weight: 700; }
+  tr { break-inside: avoid; }
+  ol, ul { padding-left: 7mm; margin: 1mm 0; }
+  li { margin: 1.2mm 0; }
+  .p { color: var(--plus); font-weight: 700; }
+  .m { color: var(--minus); font-weight: 700; }
+  .d { color: var(--data); font-weight: 700; }
+  .row { display: flex; gap: 5mm; align-items: flex-start; }
+  .row > .text { flex: 1; }
+  .fig { border: 1px solid var(--line); padding: 2mm; margin: 2mm 0; break-inside: avoid; }
+  .fig img { width: 100%; height: auto; display: block; }
+  .cap { font-size: 9.5pt; color: var(--sub); margin-top: 1mm; }
+  .check li { list-style: none; position: relative; padding-left: 8mm; }
+  .check li::before { content: "□"; position: absolute; left: 0; font-size: 14pt; line-height: 1.4; }
+  .check { padding-left: 0; }
+  .pb { page-break-before: always; }
+  h2, h3 { break-after: avoid; }
+  .small { font-size: 8.5pt; }
+  .tech { font-size: 10.5pt; line-height: 1.6; }
+  .tech table { font-size: 10pt; }
+  .foot { margin-top: 6mm; font-size: 9pt; color: var(--sub); border-top: 1px solid var(--line); padding-top: 2mm; }
+</style>
+</head>
+<body>
+<h1>LEDテープ 5本構成 組立・設定マニュアル（技術者向け）</h1>
+<p class="lead">BTF-LIGHTING WS2811 DC12V（5m・60LEDs/m）× 5 ／ ENTTEC OCTO MK3 ／ 海渡電子 ACアダプター 12V 5A × 5 ／ TouchDesigner（Art-Net）<br>
+小学生向けの手順書（LEDテープ組立説明書）と同じ構成を、仕様・根拠・設定値中心にまとめたものです。</p>
+
+<h2>1. システム構成</h2>
+<div class="fig"><svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="13">
+  <g font-weight="700" text-anchor="middle">
+    <rect x="20" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="75" y="47">アダプター1</text>
+    <rect x="200" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="255" y="47">アダプター2</text>
+    <rect x="380" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="435" y="47">アダプター3</text>
+    <rect x="200" y="260" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="255" y="287">アダプター4</text>
+    <rect x="380" y="260" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="435" y="287">アダプター5</text>
+  </g>
+  <rect x="20" y="150" width="110" height="110" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>
+  <text x="75" y="172" text-anchor="middle" font-weight="700">OCTO</text>
+  <text x="34" y="200">POWER</text>
+  <text x="34" y="226">ポート1</text>
+  <text x="34" y="250">ポート2</text>
+  <g font-weight="700">
+    <rect x="160" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="170" y="142">テープ1</text>
+    <rect x="345" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="355" y="142">テープ2</text>
+    <rect x="530" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="540" y="142">テープ3</text>
+    <rect x="160" y="340" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="170" y="362">テープ4</text>
+    <rect x="345" y="340" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="355" y="362">テープ5</text>
+  </g>
+  <g fill="#555"><text x="270" y="142">→</text><text x="455" y="142">→</text><text x="640" y="142">→</text><text x="270" y="362">→</text><text x="455" y="362">→</text></g>
+  <g stroke="#c62828" stroke-width="3" fill="none">
+    <path d="M110 64 L110 100 L175 100 L175 120"/>
+    <path d="M255 64 L255 100 L360 100 L360 120"/>
+    <path d="M435 64 L435 90 L545 90 L545 120"/>
+    <path d="M255 304 L255 325 L175 325 L175 340"/>
+    <path d="M435 304 L435 325 L360 325 L360 340"/>
+    <path d="M40 64 L40 150"/>
+  </g>
+  <g stroke="#2e7d32" stroke-width="4" fill="none">
+    <path d="M130 222 L145 222 L145 137 L160 137"/>
+    <path d="M130 246 L145 246 L145 357 L160 357"/>
+    <path d="M320 137 L345 137"/>
+    <path d="M505 137 L530 137"/>
+    <path d="M320 357 L345 357"/>
+  </g>
+  <g fill="#2e7d32" font-size="12" text-anchor="middle">
+    <text x="332" y="176">ジャンパー</text><text x="517" y="176">ジャンパー</text><text x="332" y="396">ジャンパー</text>
+  </g>
+  <g font-size="13">
+    <line x1="545" y1="230" x2="580" y2="230" stroke="#c62828" stroke-width="3"/><text x="588" y="235">電源 12V</text>
+    <line x1="545" y1="258" x2="580" y2="258" stroke="#2e7d32" stroke-width="4"/><text x="588" y="263">データ＋GND</text>
+    <text x="545" y="292" fill="#555">→ データ方向</text>
+  </g>
+</svg><div class="cap">全体構成。電源はテープごとに独立（12V 5A × 5）、データは OCTO の2ポートから供給。GND は全系統で共通。</div></div>
+<table>
+  <tr><th style="width:22%">系統</th><th style="width:26%">テープ</th><th style="width:14%">ピクセル</th><th style="width:18%">Art-Net Universe</th><th>電源</th></tr>
+  <tr><td>OCTO ポート1</td><td>テープ1 → 2 → 3（デイジーチェーン）</td><td>300</td><td>0, 1</td><td>アダプター1（＋OCTO 本体）・2・3</td></tr>
+  <tr><td>OCTO ポート2</td><td>テープ4 → 5（デイジーチェーン）</td><td>200</td><td>2, 3</td><td>アダプター4・5</td></tr>
+</table>
+
+<h2>2. 機器仕様</h2>
+<table>
+  <tr><th style="width:24%">機器</th><th>仕様・備考</th></tr>
+  <tr><td>LEDテープ</td><td>BTF-LIGHTING WS2811、DC12V、5m／巻、60LEDs/m（300 LED／巻）。<b>WS2811 IC 1個で LED 3個を制御</b>するため、アドレス単位は <b>100 ピクセル／巻</b>（約5cm）。1線式（DATA のみ、CLK なし）。両端に 3ピン JST SM コネクター（入力：メス、出力：オス）＋電源用リード（赤＝12V、白＝GND）。<br><span class="small">Amazon ASIN B082CVZVRY（IP65）</span></td></tr>
+  <tr><td>コントローラー</td><td>ENTTEC OCTO MK3（71522）。入力 DC 5〜60V／最大 5W。出力 2ポート（各 4ピン：V－・DATA・CLK/DATA・V＋）。対応入力：Art-Net（初期値）・sACN・ESP・KiNet。最大 1,360 RGB ピクセル／ポート。データ線長は出力から最初のピクセルまで <b>3m 以内</b>。初期 LED Protocol は <b>WS2812B</b>。</td></tr>
+  <tr><td>電源</td><td>海渡電子 ACアダプター 12V 5A（60W）× 5。出力は DC プラグ。付属の DC ジャック プッシュ式端子（赤＝＋、黒＝－）で電線に変換。</td></tr>
+  <tr><td>配線材</td><td>電源：スピーカーケーブル 16AWG（約 1.3mm²）。データ：テープ付属 JST リード、予備の JST SM 3ピン（オス・メス）。接続：レバー式ワンタッチコネクター（3極 JAPPY、5極 WAGO）。</td></tr>
+</table>
+
+<h2>3. 電源設計</h2>
+<h3>3-1. 消費電流の見積もり</h3>
+<p>12V WS2811 テープは、IC 1個が LED 3個（直列）を1セグメントとして駆動します。一般的な定格（1セグメント・1色あたり約 20mA）で見積もると：</p>
+<table>
+  <tr><th style="width:44%">項目</th><th>値（目安）</th></tr>
+  <tr><td>1セグメント 白・最大（R+G+B）</td><td>約 60mA</td></tr>
+  <tr><td>1m（20セグメント）</td><td>約 1.2A ／ 約 14.4W</td></tr>
+  <tr><td>5m（100セグメント）</td><td><b>約 6A ／ 約 72W</b></td></tr>
+  <tr><td>アダプター容量</td><td>5A ／ 60W</td></tr>
+</table>
+<div class="note warn"><b>注意：</b>白・全点灯（全チャンネル 255）では、アダプター容量を超える可能性があります。運用時は TouchDesigner 側で全体輝度を <b>約 80% 以下</b>に制限するか、白の全点灯を長時間続けないでください。正確な値は販売ページの消費電力表記、または実測で確認してください。</div>
+
+<h3>3-2. 給電方式</h3>
+<ul>
+  <li>各テープは<b>入力側の電源用リード</b>から、そのテープ専用のアダプターで給電します（片側給電）。12V・5m では片側給電で実用上問題ありません。末端の色ずれ・暗さが出る場合は、出力側リードからも同じアダプターで給電します。</li>
+  <li><b>アダプター間の ＋ は絶対に接続しません</b>（出力電圧の差で逆流・発熱のおそれ）。そのため、テープ間の JST の 12V ピンは<b>切り離し</b>、データと GND のみを渡すジャンパーを使います（5章）。</li>
+  <li><b>GND は全系統で共通</b>にします。データ信号の基準を揃えるためで、ジャンパーの GND 線と、OCTO ポートの V－ を通して共通になります。</li>
+  <li>OCTO 本体はアダプター1 から給電します（最大 5W で、テープ1 側の余裕内）。OCTO 出力の V＋ はテープ給電に使いません。</li>
+  <li>出力側の電源用リード（赤・白）は未使用時も 12V／GND に導通しているため、<b>個別に絶縁</b>します。</li>
+</ul>
+<div class="fig"><img src="img/wiring_diagram.png" alt="配電配線図" style="width:70%"><div class="cap">参考：メーカーの配電配線図（単一電源で複数巻を給電する例）。本構成はアダプターを巻ごとに分けるため、巻間の 12V は接続しない。</div></div>
+
+<h2>4. 結線表</h2>
+<h3>4-1. 電源（テープごと）</h3>
+<table>
+  <tr><th style="width:16%">電線</th><th style="width:34%">始点</th><th>終点</th></tr>
+  <tr><td>A1〜A5（＋）</td><td>DC ジャック端子 赤（＋）</td><td>3極コネクター ← テープ入力側 赤リード</td></tr>
+  <tr><td>B1〜B5（－）</td><td>DC ジャック端子 黒（－）</td><td>5極コネクター ← テープ入力側 白リード</td></tr>
+  <tr><td>C（＋）</td><td>テープ1 の 3極コネクター</td><td>OCTO POWER ＋（右）</td></tr>
+  <tr><td>D（－）</td><td>テープ1 の 5極コネクター</td><td>OCTO POWER －（左）</td></tr>
+</table>
+<p class="small">16AWG スピーカーケーブル 10〜15cm × 12本。極性識別のため、印のある芯線を ＋（A・C）、無印を －（B・D）に割り当てる。被覆剥き 約1cm。</p>
+
+<h3>4-2. データ</h3>
+<div class="fig"><img src="img/octo_terminals.jpg" alt="OCTO MK3 の端子"><div class="cap">OCTO MK3 端子配置（左から POWER －／＋、ポート2：V－・DATA・CLK・V＋、ポート1：V－・DATA・CLK・V＋）</div></div>
+<table>
+  <tr><th style="width:26%">区間</th><th style="width:36%">接続</th><th>備考</th></tr>
+  <tr><td>OCTO ポート1 → テープ1</td><td>付属オス JST：緑 → DATA、白 → V－</td><td>赤（12V）は未接続・絶縁。CLK・V＋ 未使用</td></tr>
+  <tr><td>OCTO ポート2 → テープ4</td><td>同上</td><td>同上</td></tr>
+  <tr><td>テープ1→2、2→3、4→5</td><td>ジャンパー（メス JST ― オス JST）：緑・白のみ接続</td><td>赤は両側とも未接続・絶縁</td></tr>
+</table>
+<div class="note warn"><b>重要：</b>テープ同士の JST を直結しないこと。12V ピンを通じてアダプター間の ＋ が並列接続される。</div>
+
+<h3>4-3. テープ端部</h3>
+<div class="row">
+  <div class="fig" style="flex:0 0 62mm"><img src="img/tape_input_end.jpg" alt="入力側"><div class="cap">入力側（Din・メス JST・電源リード）</div></div>
+  <div class="fig" style="flex:1"><img src="img/tape_output_end.jpg" alt="出力側"><div class="cap">出力側（Dout・オス JST・電源リード）</div></div>
+</div>
+<p class="small">データ方向はテープ上の矢印。入力側の基板パッドは 12V／Din／GND、出力側は 12V／Do／GND。</p>
+
+<h2>5. ジャンパーの製作（3本）</h2>
+<div class="fig"><svg viewBox="0 0 760 235" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="14"><rect x="30" y="90" width="34" height="30" rx="3" fill="#111"/><circle cx="39" cy="105" r="2.6" fill="#888"/><circle cx="47" cy="105" r="2.6" fill="#888"/><circle cx="55" cy="105" r="2.6" fill="#888"/><text x="47" y="140" fill="#1a1a1a" font-size="13" text-anchor="middle" font-weight="700">メス JST</text><rect x="690" y="90" width="34" height="30" rx="3" fill="#111"/><rect x="724" y="96" width="8" height="3" fill="#bbb"/><rect x="724" y="104" width="8" height="3" fill="#bbb"/><rect x="724" y="112" width="8" height="3" fill="#bbb"/><text x="707" y="140" fill="#1a1a1a" font-size="13" text-anchor="middle" font-weight="700">オス JST</text><rect x="330" y="40" width="100" height="40" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/><text x="380.0" y="64.55" text-anchor="middle" font-size="13" font-weight="700">3極</text><rect x="330" y="130" width="100" height="40" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/><text x="380.0" y="154.55" text-anchor="middle" font-size="13" font-weight="700">3極</text><path d="M64 98 L330 60" stroke="#2e7d32" stroke-width="4" fill="none"/><path d="M690 98 L430 60" stroke="#2e7d32" stroke-width="4" fill="none"/><path d="M64 106 L330 150" stroke="#9aa3a8" stroke-width="6" fill="none"/><path d="M64 106 L330 150" stroke="#fff" stroke-width="3" fill="none"/><path d="M690 106 L430 150" stroke="#9aa3a8" stroke-width="6" fill="none"/><path d="M690 106 L430 150" stroke="#fff" stroke-width="3" fill="none"/><text x="200" y="62" fill="#2e7d32" font-size="12" text-anchor="start" font-weight="700">DATA（緑）</text><text x="540" y="62" fill="#2e7d32" font-size="12" text-anchor="start" font-weight="700">DATA（緑）</text><text x="200" y="150" fill="#37474f" font-size="12" text-anchor="start" font-weight="700">GND（白）</text><text x="560" y="150" fill="#37474f" font-size="12" text-anchor="start" font-weight="700">GND（白）</text><path d="M64 114 L150 200" stroke="#c62828" stroke-width="4" fill="none"/><rect x="140" y="196" width="24" height="24" rx="3" fill="#333"/><path d="M690 114 L610 200" stroke="#c62828" stroke-width="4" fill="none"/><rect x="598" y="196" width="24" height="24" rx="3" fill="#333"/><text x="380" y="215" fill="#c62828" font-size="13" text-anchor="middle" font-weight="700">12V（赤）は接続しない・両端絶縁</text></svg><div class="cap">メス JST（前段の出力オスに接続）とオス JST（次段の入力メスに接続）を、DATA（緑）と GND（白）のみ接続。12V（赤）は両側とも絶縁。</div></div>
+<p>3極ワンタッチコネクター × 2（DATA 用・GND 用）で接続。必要に応じて長さを調整してよい（WS2811 の Dout は再生出力のため、テープ間は数 m 程度まで実用上問題なし）。</p>
+
+<h2>6. 通電前チェック</h2>
+<ul class="check">
+  <li>DC ジャック端子：赤＝A、黒＝B（5台とも）</li>
+  <li>3極（＋）には赤リード・A・（テープ1のみ C）、5極（－）には白リード・B・（テープ1のみ D）のみ</li>
+  <li>OCTO POWER：右＝C（＋）、左＝D（－）</li>
+  <li>OCTO ポート1・2：DATA＝緑、V－＝白。CLK・V＋ 未接続</li>
+  <li>テープ間はすべてジャンパー経由（JST 直結なし）、ジャンパーの 12V 未接続</li>
+  <li>未使用の赤（付属 JST・ジャンパー）と、出力側電源リードがすべて絶縁済み</li>
+  <li>通電は電源タップのスイッチで一括投入（アダプター5台を接続後）</li>
+</ul>
+
+<h2>7. OCTO MK3 の設定</h2>
+<h3>7-1. 接続</h3>
+<ol>
+  <li>PC と OCTO の <b>ETHERNET IN</b> を LAN ケーブルで直結（THROUGH は次の機器へのパススルー用）。</li>
+  <li>OCTO は初期 DHCP。DHCP サーバーがない場合は <b>192.168.0.10／255.255.255.0</b>（ゲートウェイ 192.168.0.254）にフォールバック。PC を <b>192.168.0.20／255.255.255.0</b> の固定 IP に設定。</li>
+  <li>ブラウザで http://192.168.0.10 を開く（HTTP のみ。「保護されていない通信」表示は正常）。見つからない場合は ENTTEC <b>EMU</b> で検出。</li>
+</ol>
+<p class="small">RESET／IDENTIFY ボタン：短押しで全出力を 10 秒間 255 にする Identify。ボタンを押したまま電源投入し、LED が黄色になるまで保持するとネットワーク設定が初期化される。</p>
+
+<h3>7-2. 設定値</h3>
+<table>
+  <tr><th style="width:34%">場所</th><th style="width:24%">項目</th><th style="width:21%">ポート1</th><th>ポート2</th></tr>
+  <tr><td>Settings → Pixel Mapping Options</td><td>Input Protocol</td><td colspan="2">Art-Net（初期値）</td></tr>
+  <tr><td>Settings → Output Settings</td><td>LED Protocol</td><td>WS2811</td><td>WS2811</td></tr>
+  <tr><td>Settings → Output Settings</td><td>Mapped Pixels</td><td>300</td><td>200</td></tr>
+  <tr><td>Settings → Output Settings</td><td>Start Universe</td><td>0</td><td>2</td></tr>
+  <tr><td>Settings → Output Settings</td><td>Color Order</td><td colspan="2">実機で確認（RGB／GRB 等）</td></tr>
+</table>
+<p>変更後は <b>Save</b>（保存しないと反映されない）。1ユニバース = 512ch のため RGB は最大 170 ピクセル／ユニバース。OCTO は開始ユニバースから連続して割り当てる（ポート1：0・1、ポート2：2・3）。Art-Net のユニバース番号は 0 始まり。</p>
+
+<h2>8. TouchDesigner（Art-Net 送出）</h2>
+<h3>8-1. チャンネル割り当て</h3>
+<table>
+  <tr><th style="width:14%">Universe</th><th style="width:22%">サンプル範囲</th><th style="width:20%">ピクセル</th><th>テープ</th></tr>
+  <tr><td>0</td><td>0〜509</td><td>1〜170</td><td>テープ1 全体、テープ2 の 1〜70</td></tr>
+  <tr><td>1</td><td>510〜899</td><td>171〜300</td><td>テープ2 の 71〜100、テープ3 全体</td></tr>
+  <tr><td>2</td><td>900〜1409</td><td>301〜470</td><td>テープ4 全体、テープ5 の 1〜70</td></tr>
+  <tr><td>3</td><td>1410〜1499</td><td>471〜500</td><td>テープ5 の 71〜100</td></tr>
+</table>
+<p class="small">サンプル 3n・3n+1・3n+2 が n 番目（0 始まり）のピクセルの R・G・B。</p>
+
+<h3>8-2. ネットワーク</h3>
+<table>
+  <tr><th style="width:28%">オペレーター</th><th style="width:30%">パラメーター</th><th>値</th></tr>
+  <tr><td>Pattern CHOP（例）</td><td>Length</td><td>1500</td></tr>
+  <tr><td>Math CHOP</td><td>Range</td><td>-1〜1 → 0〜255（DMX 値は 0〜255）</td></tr>
+  <tr><td>Trim CHOP × 4</td><td>Start／End（Samples）</td><td>8-1 の範囲</td></tr>
+  <tr><td rowspan="6">DMX Out CHOP × 4</td><td>Interface</td><td>Art-Net</td></tr>
+  <tr><td>Format</td><td>Packet Per Channel（1チャンネルのサンプル列を DMX ch として送出）</td></tr>
+  <tr><td>Network Address</td><td>192.168.0.10（ブロードキャスト 255.255.255.255 でも可）</td></tr>
+  <tr><td>Net／Subnet</td><td>0／0</td></tr>
+  <tr><td>Universe</td><td>0／1／2／3（Universe = Net×256 + Subnet×16 + Universe）</td></tr>
+  <tr><td>Rate／Port</td><td>≤ 44（DMX の更新上限）／6454</td></tr>
+</table>
+<p class="small">実運用では、TOP の画像をピクセル列にサンプリング（TOP to CHOP など）して 1500 サンプルに整形し、全体輝度を Math CHOP で制限する（3-1 参照）。</p>
+
+<h2>9. トラブルシューティング</h2>
+<table>
+  <tr><th style="width:32%">症状</th><th>確認事項</th></tr>
+  <tr><td>OCTO が起動しない</td><td>C／D の極性・締め付け、アダプター1 の DC ジャック端子</td></tr>
+  <tr><td>全テープ不点灯</td><td>LED Protocol（WS2811）・Save、Input Protocol、Start Universe と TD の Universe の一致、PC の IP・ファイアウォール（UDP 6454）</td></tr>
+  <tr><td>ポート単位で不点灯</td><td>該当ポートの DATA／V－、付属 JST の挿入方向（入力側に接続しているか）</td></tr>
+  <tr><td>途中から先が不点灯・ちらつき</td><td>直前のジャンパーの DATA／GND、GND 共通化、該当テープの電源</td></tr>
+  <tr><td>ピクセル単位でずれる</td><td>Mapped Pixels、Trim 範囲、170 ピクセル境界</td></tr>
+  <tr><td>色が違う</td><td>Color Order（RGB／GRB 等）</td></tr>
+  <tr><td>末端が暗い・赤みがかる</td><td>電圧降下。出力側リードからの追加給電、輝度制限</td></tr>
+  <tr><td>アダプターの保護停止・発熱</td><td>白全点灯による過負荷（3-1）。輝度を下げる</td></tr>
+</table>
+
+<h2>10. 部品表</h2>
+<table>
+  <tr><th style="width:52%">品名</th><th style="width:12%">数量</th><th>用途</th></tr>
+  <tr><td>BTF-LIGHTING WS2811 LEDテープ DC12V 5m 60LEDs/m（IP65）</td><td>5</td><td>本体</td></tr>
+  <tr><td>海渡電子 ACアダプター 12V 5A（DC ジャック プッシュ式端子付）</td><td>5</td><td>テープ給電（1 は OCTO も）</td></tr>
+  <tr><td>ENTTEC OCTO MK3</td><td>1</td><td>Art-Net → WS2811</td></tr>
+  <tr><td>BTF-LIGHTING JST SM 3ピン（オス・メス 10組）</td><td>1</td><td>ジャンパー 3本</td></tr>
+  <tr><td>レバー式ワンタッチコネクター 3極（JAPPY）</td><td>11個</td><td>＋側 5・ジャンパー 6</td></tr>
+  <tr><td>レバー式ワンタッチコネクター 5極（WAGO）</td><td>5個</td><td>－側</td></tr>
+  <tr><td>スピーカーケーブル 16AWG</td><td>約 2m</td><td>電源配線 12本</td></tr>
+  <tr><td>電源タップ（スイッチ付き）6個口</td><td>1</td><td>アダプター一括投入</td></tr>
+  <tr><td>LAN ケーブル</td><td>1</td><td>PC ↔ OCTO</td></tr>
+</table>
+
+<p class="foot">VFX照明制作 ／ LEDテープ 5本構成 技術者向けマニュアル　　販売ページの画像（テープ端子・配電配線図）は BTF-LIGHTING より。OCTO の仕様は ENTTEC OCTO MK3 User Manual（2026年1月版）に基づく。</p>
+
+</body>
+</html>
