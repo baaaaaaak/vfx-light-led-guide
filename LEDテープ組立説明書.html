@@ -109,25 +109,79 @@
 <h2>3. テープ1本の組立</h2>
 <div class="note warn"><b>重要：</b>配線が終わるまで、ACアダプターはコンセントに差さないでください。</div>
 
-<h3>3-1. 電線を用意する</h3>
+<h3>3-1. 全体の配線</h3>
+<div class="fig">
+<svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="13">
+  <!-- 機器 -->
+  <rect x="20" y="40" width="140" height="80" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
+  <text x="90" y="72" text-anchor="middle" font-weight="700">ACアダプター</text>
+  <text x="90" y="92" text-anchor="middle" fill="#555">DCジャック</text>
+  <text x="90" y="110" text-anchor="middle" fill="#555">コネクター</text>
+  <rect x="300" y="20" width="110" height="50" rx="6" fill="#fff" stroke="#c62828" stroke-width="2"/>
+  <text x="355" y="42" text-anchor="middle" fill="#c62828" font-weight="700">＋側</text>
+  <text x="355" y="60" text-anchor="middle" fill="#555">3本用コネクター</text>
+  <rect x="300" y="110" width="110" height="50" rx="6" fill="#fff" stroke="#37474f" stroke-width="2"/>
+  <text x="355" y="132" text-anchor="middle" fill="#37474f" font-weight="700">－側</text>
+  <text x="355" y="150" text-anchor="middle" fill="#555">5本用コネクター</text>
+  <rect x="560" y="20" width="180" height="150" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
+  <text x="650" y="44" text-anchor="middle" font-weight="700">OCTO MK3</text>
+  <text x="580" y="80" fill="#1a1a1a">POWER ＋</text>
+  <text x="580" y="104" fill="#1a1a1a">POWER －</text>
+  <text x="580" y="140" fill="#1a1a1a">ポート1 DATA</text>
+  <text x="580" y="162" fill="#1a1a1a">ポート1 V－</text>
+  <rect x="300" y="230" width="440" height="80" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
+  <text x="520" y="252" text-anchor="middle" font-weight="700">LEDテープ（入力側の端）</text>
+  <text x="330" y="282" fill="#555">赤い電圧付加ワイヤ（＋）</text>
+  <text x="330" y="300" fill="#555">白い電圧付加ワイヤ（－）</text>
+  <text x="560" y="282" fill="#555">ギフトコネクター</text>
+  <text x="560" y="300" fill="#555">緑（データ）・白（GND）</text>
+  <!-- 線A〜D -->
+  <path d="M160 60 L300 45" stroke="#c62828" stroke-width="3" fill="none"/>
+  <text x="222" y="42" fill="#c62828" font-weight="700" font-size="15">線A</text>
+  <path d="M160 100 L300 135" stroke="#37474f" stroke-width="3" fill="none"/>
+  <text x="222" y="132" fill="#37474f" font-weight="700" font-size="15">線B</text>
+  <path d="M410 45 L560 76" stroke="#c62828" stroke-width="3" fill="none"/>
+  <text x="470" y="48" fill="#c62828" font-weight="700" font-size="15">線C</text>
+  <path d="M410 135 L560 100" stroke="#37474f" stroke-width="3" fill="none"/>
+  <text x="470" y="108" fill="#37474f" font-weight="700" font-size="15">線D</text>
+  <!-- テープの電源線 -->
+  <path d="M330 70 L330 268" stroke="#c62828" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+  <path d="M380 160 L380 286" stroke="#37474f" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+  <!-- データと GND -->
+  <path d="M600 268 L600 205 L700 205 L700 136 L740 136" stroke="#2e7d32" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+  <path d="M640 286 L640 215 L720 215 L720 158 L740 158" stroke="#37474f" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+</svg>
+<div class="cap">実線（線A〜D）は、スピーカーケーブルを切って作る短い線です。点線はテープに最初から付いている線です。</div>
+</div>
+
+<table>
+  <tr><th style="width:14%">線</th><th style="width:38%">片方の端</th><th>もう片方の端</th></tr>
+  <tr><td><span class="p">線A</span></td><td>DCジャックコネクターの <span class="p">＋</span></td><td><span class="p">＋側</span>コネクター（3本用）</td></tr>
+  <tr><td><span class="m">線B</span></td><td>DCジャックコネクターの <span class="m">－</span></td><td><span class="m">－側</span>コネクター（5本用）</td></tr>
+  <tr><td><span class="p">線C</span></td><td><span class="p">＋側</span>コネクター（3本用）</td><td>OCTO の POWER <span class="p">＋</span>（右）</td></tr>
+  <tr><td><span class="m">線D</span></td><td><span class="m">－側</span>コネクター（5本用）</td><td>OCTO の POWER <span class="m">－</span>（左）</td></tr>
+</table>
+<p style="font-size:9.5pt">どの線も同じスピーカーケーブルなので、見分けがつくように、<b>＋に使う線A・線C はケーブルの印（線や文字）のある側</b>、<b>－に使う線B・線D は印のない側</b>から取ると間違えにくくなります。両端にマスキングテープで「A」「B」などと書いておくのもおすすめです。</p>
+
+<h3>3-2. 電線を用意する</h3>
 <ol>
   <li>スピーカーケーブルを 10〜15cm に4本切ります（線A〜D）。2本ずつ線が並んでいるので、裂いて1本ずつにします。</li>
   <li>すべての線の両端の被覆を約1cm むきます。</li>
 </ol>
 
-<h3>3-2. ＋側をつなぐ（3本用コネクター）</h3>
+<h3>3-3. ＋側をつなぐ（3本用コネクター）</h3>
 <ol>
   <li>DCジャックコネクターの <span class="p">＋</span> に線A を差します。</li>
   <li>3本用コネクターに、<span class="p">線A</span>・テープの<span class="p">赤い電圧付加ワイヤ</span>・OCTO へ行く<span class="p">線C</span> を差します。</li>
 </ol>
 
-<h3>3-3. －側をつなぐ（5本用コネクター）</h3>
+<h3>3-4. －側をつなぐ（5本用コネクター）</h3>
 <ol>
   <li>DCジャックコネクターの <span class="m">－</span> に線B を差します。</li>
   <li>5本用コネクターに、<span class="m">線B</span>・テープの<span class="m">白い電圧付加ワイヤ</span>・OCTO へ行く<span class="m">線D</span> を差します。</li>
 </ol>
 
-<h3>3-4. OCTO につなぐ</h3>
+<h3>3-5. OCTO につなぐ</h3>
 <ol>
   <li><span class="p">線C</span> を POWER の<span class="p">右（＋）</span>に、<span class="m">線D</span> を POWER の<span class="m">左（－）</span>に差し、上のネジをドライバーで締めます。</li>
   <li>ギフトコネクターの<span class="d">緑の線（データ）</span>を、ポート1の<span class="d">左から2番目（DATA）</span>に固定します。</li>
