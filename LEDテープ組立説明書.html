@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>LEDテープ 組立説明書</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm 14mm 14mm; }
+  :root { --ink:#1a1a1a; --sub:#555; --line:#c9c9c9; --plus:#c62828; --minus:#37474f; --data:#2e7d32; --warn:#b26a00; --bg:#f6f6f4; }
+  * { box-sizing: border-box; }
+  body { font-family: "Yu Gothic UI","Yu Gothic","Meiryo",sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.6; margin: 0; }
+  h1 { font-size: 17pt; margin: 0 0 2mm; letter-spacing: .02em; }
+  .lead { color: var(--sub); margin: 0 0 5mm; font-size: 9.5pt; }
+  h2 { font-size: 12pt; margin: 6mm 0 2mm; padding-bottom: 1mm; border-bottom: 1.5px solid var(--ink); }
+  h3 { font-size: 10.5pt; margin: 4mm 0 1mm; }
+  .note { background: var(--bg); border-left: 4px solid var(--ink); padding: 2.5mm 4mm; margin: 3mm 0; }
+  .warn { border-left-color: var(--warn); }
+  .warn b { color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  th, td { border: 1px solid var(--line); padding: 1.5mm 2.5mm; text-align: left; vertical-align: top; }
+  th { background: var(--bg); font-weight: 600; }
+  ol { padding-left: 6mm; margin: 1mm 0; }
+  ol li { margin: 1mm 0; }
+  .p { color: var(--plus); font-weight: 700; }
+  .m { color: var(--minus); font-weight: 700; }
+  .d { color: var(--data); font-weight: 700; }
+  .row { display: flex; gap: 5mm; align-items: flex-start; }
+  .row > .fig { flex: 0 0 58mm; }
+  .row > .text { flex: 1; }
+  .fig { border: 1px solid var(--line); padding: 2mm; margin: 2mm 0; break-inside: avoid; }
+  .fig img { width: 100%; height: auto; display: block; }
+  .cap { font-size: 8.5pt; color: var(--sub); margin-top: 1mm; }
+  .check li { list-style: none; position: relative; padding-left: 6mm; }
+  .check li::before { content: "□"; position: absolute; left: 0; }
+  .check { padding-left: 0; }
+  .pb { page-break-before: always; }
+  h2, h3 { break-after: avoid; }
+  .note, table tr, .check li { break-inside: avoid; }
+  .foot { margin-top: 6mm; font-size: 8.5pt; color: var(--sub); border-top: 1px solid var(--line); padding-top: 2mm; }
+</style>
+</head>
+<body>
+
+<h1>LEDテープ 組立説明書</h1>
+<p class="lead">BTF-LIGHTING WS2811 DC12V LEDテープ（5m・60LEDs/m）／ ENTTEC OCTO MK3 ／ 海渡電子 ACアダプター 12V 5A<br>
+テープ1本を組み立てて点灯させ、そのあと複数本へ広げる手順です。</p>
+
+<div class="note warn"><b>はじめに：</b>このLEDテープは、電源をつなぐだけでは点灯しません。各LEDに「何色で光るか」という信号（データ）が必要です。信号は <b>OCTO MK3</b> から送ります。ENTTEC DMX USB PRO は照明器具用の DMX 信号を出す機器なので、このテープを直接光らせることはできません。</div>
+
+<h2>1. 部品の確認</h2>
+<table>
+  <tr><th style="width:30%">部品</th><th style="width:12%">数量</th><th>用途</th></tr>
+  <tr><td>WS2811 LEDテープ 12V 5m</td><td>5</td><td>1本 = 100ピクセル（ICチップ1個で LED 3個をまとめて制御、約5cm 単位）</td></tr>
+  <tr><td>ACアダプター 12V 5A（60W）</td><td>5</td><td>テープ1本に1個。付属の DCジャック プッシュ式コネクター（赤・黒のボタン付き）を使います</td></tr>
+  <tr><td>ENTTEC OCTO MK3</td><td>1</td><td>テープに信号を送るコントローラー</td></tr>
+  <tr><td>3ピン JST コネクター（オス・メス 10組）</td><td>1</td><td>予備・延長用</td></tr>
+  <tr><td>WAGO ワンタッチコネクター 5本用</td><td>2パック</td><td>－（GND）側をまとめる</td></tr>
+  <tr><td>JAPPY ワンタッチコネクター 3本用</td><td>2パック</td><td>＋側をまとめる</td></tr>
+  <tr><td>スピーカーケーブル 16ゲージ 30.5m</td><td>1</td><td>電源・GND の配線用</td></tr>
+  <tr><td>電源タップ 6個口</td><td>1</td><td>ACアダプターをまとめて差す</td></tr>
+</table>
+<p style="font-size:9.5pt">工具：ワイヤーストリッパー（またはニッパー）、精密マイナスドライバー、ビニールテープ</p>
+
+<h2>2. テープの各部を知る</h2>
+<div class="row">
+  <div class="fig"><img src="img/tape_package.png" alt="テープの付属品"><div class="cap">付属品（販売ページの画像）</div></div>
+  <div class="text">
+    <p>テープの<b>入力側の端</b>には、次の2つがすでに付いています。</p>
+    <table>
+      <tr><th style="width:38%">メスコネクター（データ入力）</th><td>赤・緑・白の3本が入った黒いコネクター</td></tr>
+      <tr><th>電圧付加ワイヤ</th><td>コネクターとは別の、<span class="p">赤（＋）</span>と<span class="m">白（－）</span>の2本。電源用です</td></tr>
+    </table>
+    <p>さらに、<b>ギフトの3ピンコネクター（オス）</b>が1個入っています。先が電線むき出しで、これを OCTO 側につなぎます。</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="fig"><img src="img/tape_terminal.png" alt="テープの端子とデータの方向"><div class="cap">端子とデータの方向（販売ページの画像）</div></div>
+  <div class="text">
+    <p><b>データには向きがあります。</b>テープ上の<b>矢印</b>（画像の「データの方向」）が、信号の流れる方向です。</p>
+    <ul>
+      <li>矢印が<b>始まる側</b>の端子は <b>12V / Din / GND</b>。ここが<b>入力側</b>で、OCTO につなぐ側です。</li>
+      <li>画像の端子は <b>12V / Dout / GND</b> と書かれた<b>出力側</b>です。こちらに OCTO をつないでも光りません。</li>
+      <li>出力側は、次のテープの入力側へつなぐときに使います。</li>
+    </ul>
+  </div>
+</div>
+
+<h2>3. テープ1本の組立</h2>
+<div class="note warn"><b>重要：</b>配線が終わるまで、ACアダプターはコンセントに差さないでください。</div>
+
+<h3>3-1. 電線を用意する</h3>
+<ol>
+  <li>スピーカーケーブルを 10〜15cm に4本切ります（線A〜D）。2本ずつ線が並んでいるので、裂いて1本ずつにします。</li>
+  <li>すべての線の両端の被覆を約1cm むきます。</li>
+</ol>
+
+<h3>3-2. ＋側をつなぐ（3本用コネクター）</h3>
+<ol>
+  <li>DCジャックコネクターの <span class="p">＋</span> に線A を差します。</li>
+  <li>3本用コネクターに、<span class="p">線A</span>・テープの<span class="p">赤い電圧付加ワイヤ</span>・OCTO へ行く<span class="p">線C</span> を差します。</li>
+</ol>
+
+<h3>3-3. －側をつなぐ（5本用コネクター）</h3>
+<ol>
+  <li>DCジャックコネクターの <span class="m">－</span> に線B を差します。</li>
+  <li>5本用コネクターに、<span class="m">線B</span>・テープの<span class="m">白い電圧付加ワイヤ</span>・OCTO へ行く<span class="m">線D</span>・ギフトコネクターの<span class="m">白い線（GND）</span> を差します。</li>
+</ol>
+
+<h3>3-4. OCTO につなぐ</h3>
+<ol>
+  <li><span class="p">線C</span> を OCTO の POWER 端子の <span class="p">＋</span> に、<span class="m">線D</span> を <span class="m">－</span> に、ドライバーで固定します。</li>
+  <li>ギフトコネクターの<span class="d">緑の線（データ）</span>を、OCTO の出力ポート1の <span class="d">DATA</span> 端子に固定します。</li>
+  <li>ギフトコネクターの<b>赤い線は使いません</b>。先端をビニールテープで巻き、他の金属に触れないようにします。</li>
+  <li>ギフトコネクターを、テープ入力側のメスコネクターに差し込みます。</li>
+</ol>
+
+<div class="note"><b>なぜ赤い線を使わないのか：</b>電源は太い電圧付加ワイヤからだけ入れます。コネクターの細い線に大きな電流が流れないようにするためです。<br>
+<b>差す前に確認：</b>ギフトコネクターをテープのメスコネクターにはめてみて、<span class="d">緑どうし</span>がつながることを確かめてください。製品によって並び順が違う場合があります。</div>
+
+<p style="font-size:9.5pt">ワンタッチコネクターの使い方：レバーを上げる → 電線を奥まで差す → レバーを下げる。軽く引っ張って抜けなければ OK です。</p>
+
+<h2>4. 電源を入れる前のチェック</h2>
+<ul class="check">
+  <li>＋ と － が入れ替わっていない（赤い線どうし・白い線どうしが同じコネクターにある）</li>
+  <li>ワンタッチコネクターのレバーがすべて下がり、電線を軽く引いても抜けない</li>
+  <li>緑の線が OCTO の DATA 端子に入っている（POWER 端子ではない）</li>
+  <li>使わない赤い線の先端が絶縁されている</li>
+  <li>OCTO は入力側（矢印が始まる側）につながっている</li>
+  <li>むき出しの銅線どうしが触れ合っていない</li>
+</ul>
+
+<h2>5. 点灯確認</h2>
+<ol>
+  <li>ACアダプターをコンセントに差します。OCTO のランプが点灯します。</li>
+  <li>OCTO 本体の <b>Identify / Reset ボタン</b>を<b>短く</b>押します。</li>
+  <li>テープにテストパターンが表示されれば、組立は成功です。</li>
+</ol>
+<div class="note warn"><b>注意：</b>ボタンを長押しすると、設定の初期化になる場合があります。短く押してください。<br>
+最初の確認は、白の最大輝度で長時間つけっぱなしにしないでください。5m を白で最大に光らせると、アダプターの容量（60W）を超えるおそれがあります。</div>
+
+<h2>6. 2本目以降をつなぐ</h2>
+<div class="fig"><img src="img/wiring_diagram.png" alt="配電配線図"><div class="cap">配電配線図（販売ページの画像）。この図は大きな電源1台から複数のテープに給電する場合です。</div></div>
+
+<p>図では、1本目の出力側の<b>データ</b>が2本目の入力側へつながり、つなぎ目ごとに電源から ＋／－ を<b>もう一度供給</b>しています。テープが長くなると電圧が下がり、先のほうが暗くなったり色が変わったりするのを防ぐためです。</p>
+
+<p>今回は<b>テープ1本ごとに 12V 5A のアダプターを1個</b>使います。つなぎ方は次の2通りです。</p>
+
+<h3>方法A：テープごとに OCTO の別のポートへつなぐ（おすすめ）</h3>
+<p>テープ1本ずつ、3章の手順で組み立て、緑の線をそれぞれ OCTO の別の出力ポートの DATA につなぎます。配線が単純で、どこかが光らないときも原因を探しやすい方法です。</p>
+<ul>
+  <li>各アダプターの <span class="m">－</span> は、OCTO の <span class="m">－</span> とつないで共通にします。</li>
+  <li>OCTO 本体の電源は、どれか1個のアダプターから取ります。</li>
+</ul>
+
+<h3>方法B：テープを1列につなぐ</h3>
+<ul>
+  <li>1本目の出力側の <span class="d">Dout</span> を、2本目の入力側の <span class="d">Din</span> へつなぎます。</li>
+  <li><span class="m">GND</span> もつないで、すべてのアダプターの <span class="m">－</span> を共通にします。</li>
+  <li><b>アダプターどうしの <span class="p">＋</span> はつなぎません。</b>テープとテープの間の <span class="p">12V</span> はつながず、各テープには自分のアダプターからだけ ＋ を入れます。</li>
+  <li>OCTO の設定で、そのポートのピクセル数を「100 × 本数」にします。</li>
+</ul>
+
+<h2>7. 点灯しないとき</h2>
+<table>
+  <tr><th style="width:32%">症状</th><th>対処</th></tr>
+  <tr><td>OCTO のランプが点かない</td><td>OCTO の電源配線（線C・線D）と、DCジャックコネクターの差し込みを確認します。</td></tr>
+  <tr><td>OCTO は点くが、テープが光らない</td><td>
+    ① OCTO が入力側（矢印が始まる側）につながっているか確認します。<br>
+    ② 緑の線が DATA 端子に入っているか確認します。<br>
+    ③ PC と LAN ケーブルでつなぎ、ブラウザで OCTO の設定画面（初期 IP：<b>192.168.0.10</b>）を開いて、<b>プロトコル：WS2811／ピクセル数：100</b> に設定します。</td></tr>
+  <tr><td>色が指定と違う</td><td>故障ではありません。OCTO の設定画面で、色の並び順（RGB／GRB など）を変更します。</td></tr>
+  <tr><td>途中から先が光らない</td><td>光らなくなった位置の直前で、データの線やつなぎ目が切れていないか確認します。</td></tr>
+  <tr><td>先のほうが暗い・色が変わる</td><td>電圧不足です。つなぎ目で ＋／－ を供給し直すか、方法Aに切り替えます。</td></tr>
+  <tr><td>異常に熱い・焦げたにおい</td><td>すぐにコンセントを抜き、＋ と － の配線を確認してください。</td></tr>
+</table>
+
+<div class="note"><b>安全について：</b>作業する電線は、すべてアダプターを通した 12V なので感電の危険はほとんどありません。ただし、配線を変えるときは必ずコンセントを抜いてから行ってください。</div>
+
+<p class="foot">VFX照明制作 ／ LEDテープ組立説明書　　画像はすべて BTF-LIGHTING の販売ページより</p>
+
+</body>
+</html>
