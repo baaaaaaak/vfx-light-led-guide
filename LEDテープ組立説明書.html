@@ -4,442 +4,376 @@
 <meta charset="utf-8">
 <title>LEDテープ 組立説明書</title>
 <style>
-  @page { size: A4; margin: 14mm 14mm 14mm 14mm; }
-  :root { --ink:#1a1a1a; --sub:#555; --line:#c9c9c9; --plus:#c62828; --minus:#37474f; --data:#2e7d32; --warn:#b26a00; --bg:#f6f6f4; }
+  @page { size: A4; margin: 13mm 13mm 13mm 13mm; }
+  :root { --ink:#1a1a1a; --sub:#555; --line:#c9c9c9; --plus:#c62828; --minus:#37474f; --data:#2e7d32; --warn:#b26a00; --bg:#f6f6f4; --step:#1f5fa8; }
   * { box-sizing: border-box; }
-  body { font-family: "Yu Gothic UI","Yu Gothic","Meiryo",sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.6; margin: 0; }
-  h1 { font-size: 17pt; margin: 0 0 2mm; letter-spacing: .02em; }
-  .lead { color: var(--sub); margin: 0 0 5mm; font-size: 9.5pt; }
-  h2 { font-size: 12pt; margin: 6mm 0 2mm; padding-bottom: 1mm; border-bottom: 1.5px solid var(--ink); }
-  h3 { font-size: 10.5pt; margin: 4mm 0 1mm; }
-  .note { background: var(--bg); border-left: 4px solid var(--ink); padding: 2.5mm 4mm; margin: 3mm 0; }
-  .warn { border-left-color: var(--warn); }
+  body { font-family: "Yu Gothic UI","Yu Gothic","Meiryo",sans-serif; color: var(--ink); font-size: 12pt; line-height: 1.8; margin: 0; }
+  rt { font-size: 55%; }
+  h1 { font-size: 22pt; margin: 0 0 2mm; }
+  .lead { color: var(--sub); margin: 0 0 4mm; font-size: 11pt; }
+  h2 { font-size: 15pt; margin: 7mm 0 3mm; padding: 1.5mm 3mm; background: var(--ink); color: #fff; border-radius: 2mm; }
+  h3 { font-size: 13pt; margin: 4mm 0 1mm; }
+  .step { border: 2px solid var(--step); border-radius: 3mm; padding: 3mm 4mm; margin: 4mm 0; break-inside: avoid; }
+  .step > .num { display: inline-block; background: var(--step); color: #fff; font-weight: 700; border-radius: 2mm; padding: 0 3mm; margin-right: 2mm; }
+  .step > .title { font-weight: 700; font-size: 13pt; }
+  .done { text-align: right; font-weight: 700; color: var(--step); margin-top: 1mm; }
+  .note { background: var(--bg); border-left: 5px solid var(--ink); padding: 2.5mm 4mm; margin: 3mm 0; break-inside: avoid; }
+  .warn { border-left-color: var(--warn); background: #fff6e8; }
   .warn b { color: var(--warn); }
-  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  .adult { border: 2px dashed var(--warn); border-radius: 3mm; padding: 2mm 4mm; margin: 3mm 0; background: #fffaf0; break-inside: avoid; }
+  .adult::before { content: "おとなの人と いっしょに"; display: block; font-weight: 700; color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 11pt; }
   th, td { border: 1px solid var(--line); padding: 1.5mm 2.5mm; text-align: left; vertical-align: top; }
-  th { background: var(--bg); font-weight: 600; }
-  ol { padding-left: 6mm; margin: 1mm 0; }
-  ol li { margin: 1mm 0; }
+  th { background: var(--bg); font-weight: 700; }
+  tr { break-inside: avoid; }
+  ol, ul { padding-left: 7mm; margin: 1mm 0; }
+  li { margin: 1.2mm 0; }
   .p { color: var(--plus); font-weight: 700; }
   .m { color: var(--minus); font-weight: 700; }
   .d { color: var(--data); font-weight: 700; }
   .row { display: flex; gap: 5mm; align-items: flex-start; }
-  .row > .fig { flex: 0 0 58mm; }
   .row > .text { flex: 1; }
   .fig { border: 1px solid var(--line); padding: 2mm; margin: 2mm 0; break-inside: avoid; }
   .fig img { width: 100%; height: auto; display: block; }
-  .cap { font-size: 8.5pt; color: var(--sub); margin-top: 1mm; }
-  .check li { list-style: none; position: relative; padding-left: 6mm; }
-  .check li::before { content: "□"; position: absolute; left: 0; }
+  .cap { font-size: 9.5pt; color: var(--sub); margin-top: 1mm; }
+  .check li { list-style: none; position: relative; padding-left: 8mm; }
+  .check li::before { content: "□"; position: absolute; left: 0; font-size: 14pt; line-height: 1.4; }
   .check { padding-left: 0; }
   .pb { page-break-before: always; }
   h2, h3 { break-after: avoid; }
-  .note, table tr, .check li { break-inside: avoid; }
-  .foot { margin-top: 6mm; font-size: 8.5pt; color: var(--sub); border-top: 1px solid var(--line); padding-top: 2mm; }
+  .small { font-size: 10pt; }
+  .tech { font-size: 10.5pt; line-height: 1.6; }
+  .tech table { font-size: 10pt; }
+  .foot { margin-top: 6mm; font-size: 9pt; color: var(--sub); border-top: 1px solid var(--line); padding-top: 2mm; }
 </style>
 </head>
 <body>
 
-<h1>LEDテープ 組立説明書</h1>
-<p class="lead">BTF-LIGHTING WS2811 DC12V LEDテープ（5m・60LEDs/m）／ ENTTEC OCTO MK3 ／ 海渡電子 ACアダプター 12V 5A<br>
-テープ1本を組み立て、OCTO を設定し、TouchDesigner から点灯させる手順です。そのあとテープ5本に広げます。</p>
+<h1>LEDテープを 5<ruby>本<rt>ほん</rt></ruby> つないで <ruby>光<rt>ひか</rt></ruby>らせよう</h1>
+<p class="lead">LEDテープ 5<ruby>本<rt>ほん</rt></ruby>（1<ruby>本<rt>ほん</rt></ruby> 5m）を、コントローラー「OCTO（オクト）」につないで、パソコンから <ruby>光<rt>ひか</rt></ruby>らせる <ruby>組立説明書<rt>くみたてせつめいしょ</rt></ruby>です。<br>
+ステップの じゅんばんどおりに すすめて、おわったら「□ できた」に ✓ を つけましょう。</p>
 
-<div class="note warn"><b>はじめに：</b>このLEDテープは、電源をつなぐだけでは点灯しません。各LEDに「何色で光るか」という信号（データ）が必要です。信号は <b>OCTO MK3</b> から送ります。ENTTEC DMX USB PRO は照明器具用の DMX 信号を出す機器なので、このテープを直接光らせることはできません。</div>
+<div class="note warn"><b>やくそく</b>
+<ol>
+  <li><b>コンセントに さすのは さいご</b>です。ステップ14 まで、ぜったいに さしません。</li>
+  <li><b><ruby>赤<rt>あか</rt></ruby>（＋）と <ruby>黒<rt>くろ</rt></ruby>・<ruby>白<rt>しろ</rt></ruby>（－）を まちがえない</b>。まちがえると、こわれることが あります。</li>
+  <li>はさみ・ニッパー・ワイヤーストリッパーを つかうときは、<b>おとなの人と いっしょに</b> やります。</li>
+  <li>へんな におい、あつい、けむりが でたら、すぐに おとなの人に しらせて、コンセントを ぬきます。</li>
+</ol></div>
 
-<h2>1. 部品の確認</h2>
-<table>
-  <tr><th style="width:30%">部品</th><th style="width:12%">数量</th><th>用途</th></tr>
-  <tr><td>WS2811 LEDテープ 12V 5m</td><td>5</td><td>1本 = 100ピクセル（ICチップ1個で LED 3個をまとめて制御、約5cm 単位）</td></tr>
-  <tr><td>ACアダプター 12V 5A（60W）</td><td>5</td><td>テープ1本に1個。付属の DCジャック プッシュ式コネクター（赤・黒のボタン付き）を使います</td></tr>
-  <tr><td>ENTTEC OCTO MK3</td><td>1</td><td>テープに信号を送るコントローラー</td></tr>
-  <tr><td>3ピン JST コネクター（オス・メス 10組）</td><td>1</td><td>予備・延長用</td></tr>
-  <tr><td>WAGO ワンタッチコネクター 5本用</td><td>2パック</td><td>－（GND）側をまとめる</td></tr>
-  <tr><td>JAPPY ワンタッチコネクター 3本用</td><td>2パック</td><td>＋側をまとめる</td></tr>
-  <tr><td>スピーカーケーブル 16ゲージ 30.5m</td><td>1</td><td>電源の配線用（線A〜D）。データ線には使いません</td></tr>
-  <tr><td>電源タップ 6個口</td><td>1</td><td>ACアダプターをまとめて差す</td></tr>
-</table>
-<p style="font-size:9.5pt">工具：ワイヤーストリッパー（またはニッパー）、精密マイナスドライバー、ビニールテープ</p>
-
-<h2>2. テープの各部を知る</h2>
-<div class="row">
-  <div class="fig"><img src="img/tape_package.png" alt="テープの付属品"><div class="cap">付属品（販売ページの画像）</div></div>
-  <div class="text">
-    <p>テープの<b>入力側の端</b>には、次の2つがすでに付いています。</p>
-    <table>
-      <tr><th style="width:38%">メスコネクター（データ入力）</th><td>赤・緑・白の3本が入った黒いコネクター</td></tr>
-      <tr><th>電圧付加ワイヤ</th><td>コネクターとは別の、<span class="p">赤（＋）</span>と<span class="m">白（－）</span>の2本。電源用です</td></tr>
-    </table>
-    <p>さらに、<b>ギフトの3ピンコネクター（オス）</b>が1個入っています。先が電線むき出しで、これを OCTO 側につなぎます。</p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="fig"><img src="img/tape_terminal.png" alt="テープの端子とデータの方向"><div class="cap">端子とデータの方向（販売ページの画像）</div></div>
-  <div class="text">
-    <p><b>データには向きがあります。</b>テープ上の<b>矢印</b>（画像の「データの方向」）が、信号の流れる方向です。</p>
-    <ul>
-      <li>矢印が<b>始まる側</b>の端子は <b>12V / Din / GND</b>。ここが<b>入力側</b>で、OCTO につなぐ側です。</li>
-      <li>画像の端子は <b>12V / Dout / GND</b> と書かれた<b>出力側</b>です。こちらに OCTO をつないでも光りません。</li>
-      <li>出力側は、次のテープの入力側へつなぐときに使います。</li>
-    </ul>
-  </div>
-</div>
-
-<h3>OCTO MK3 の端子</h3>
-<div class="fig"><img src="img/octo_terminals.jpg" alt="OCTO MK3 の電源端子と出力端子"><div class="cap">OCTO MK3 の端子側。端子名は緑のブロックに隠れて見えにくいので、写真に書き込みました。</div></div>
-<table>
-  <tr><th style="width:30%">端子</th><th>使い方</th></tr>
-  <tr><td><b>POWER</b>（左端の2極）</td><td>OCTO 本体の電源。<span class="m">左が －</span>、<span class="p">右が ＋</span>。DC 5〜60V に対応しています</td></tr>
-  <tr><td><b>ポート1</b>（右の4極）</td><td>左から <span class="m">V－</span>・<span class="d">DATA</span>・CLK・V＋。テープ1本目はここにつなぎます</td></tr>
-  <tr><td><b>ポート2</b>（中央の4極）</td><td>ポート1と同じ並び。テープ1本だけのときは使いません</td></tr>
-</table>
-<p style="font-size:9.5pt">WS2811 テープは信号線が1本なので、<b>CLK は使いません</b>。<b>V＋ も使いません</b>（テープの電源はアダプターから直接入れます）。緑のブロックは差し込み式で、手前に引くと外れます。外すと端子名が見やすくなります。</p>
-
-<div class="row">
-  <div class="fig" style="flex:0 0 80mm"><img src="img/octo_ethernet.jpg" alt="OCTO MK3 の LAN 端子と Identify ボタン"><div class="cap">反対側の面</div></div>
-  <div class="text">
-    <table>
-      <tr><th style="width:42%">ETHERNET IN</th><td>PC やネットワークにつなぐ LAN 端子。設定や TouchDesigner からの制御に使います</td></tr>
-      <tr><th>THROUGH</th><td>次の機器へ LAN をつなぐ端子。今回は使いません</td></tr>
-      <tr><th>RESET / IDENTIFY</th><td>今回は使いません。押したまま電源を入れると、ネットワーク設定が工場出荷時に戻ります</td></tr>
-    </table>
-  </div>
-</div>
-
-<h2>3. テープ1本の組立</h2>
-<div class="note warn"><b>重要：</b>配線が終わるまで、ACアダプターはコンセントに差さないでください。</div>
-
-<h3>3-1. 全体の配線</h3>
+<!-- ================================================================ -->
+<h2>1. どんな ものを つくるの？</h2>
 <div class="fig">
-<svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="13">
-  <!-- 機器 -->
-  <rect x="20" y="40" width="140" height="80" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
-  <text x="90" y="72" text-anchor="middle" font-weight="700">ACアダプター</text>
-  <text x="90" y="92" text-anchor="middle" fill="#555">DCジャック</text>
-  <text x="90" y="110" text-anchor="middle" fill="#555">コネクター</text>
-  <rect x="300" y="20" width="110" height="50" rx="6" fill="#fff" stroke="#c62828" stroke-width="2"/>
-  <text x="355" y="42" text-anchor="middle" fill="#c62828" font-weight="700">＋側</text>
-  <text x="355" y="60" text-anchor="middle" fill="#555">3本用コネクター</text>
-  <rect x="300" y="110" width="110" height="50" rx="6" fill="#fff" stroke="#37474f" stroke-width="2"/>
-  <text x="355" y="132" text-anchor="middle" fill="#37474f" font-weight="700">－側</text>
-  <text x="355" y="150" text-anchor="middle" fill="#555">5本用コネクター</text>
-  <rect x="560" y="20" width="180" height="150" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
-  <text x="650" y="44" text-anchor="middle" font-weight="700">OCTO MK3</text>
-  <text x="580" y="80" fill="#1a1a1a">POWER ＋</text>
-  <text x="580" y="104" fill="#1a1a1a">POWER －</text>
-  <text x="580" y="140" fill="#1a1a1a">ポート1 DATA</text>
-  <text x="580" y="162" fill="#1a1a1a">ポート1 V－</text>
-  <rect x="300" y="230" width="440" height="80" rx="6" fill="#f6f6f4" stroke="#1a1a1a"/>
-  <text x="520" y="252" text-anchor="middle" font-weight="700">LEDテープ（入力側の端）</text>
-  <text x="330" y="282" fill="#555">赤い電圧付加ワイヤ（＋）</text>
-  <text x="330" y="300" fill="#555">白い電圧付加ワイヤ（－）</text>
-  <text x="560" y="282" fill="#555">ギフトコネクター</text>
-  <text x="560" y="300" fill="#555">緑（データ）・白（GND）</text>
-  <!-- 線A〜D -->
-  <path d="M160 60 L300 45" stroke="#c62828" stroke-width="3" fill="none"/>
-  <text x="222" y="42" fill="#c62828" font-weight="700" font-size="15">線A</text>
-  <path d="M160 100 L300 135" stroke="#37474f" stroke-width="3" fill="none"/>
-  <text x="222" y="132" fill="#37474f" font-weight="700" font-size="15">線B</text>
-  <path d="M410 45 L560 76" stroke="#c62828" stroke-width="3" fill="none"/>
-  <text x="470" y="48" fill="#c62828" font-weight="700" font-size="15">線C</text>
-  <path d="M410 135 L560 100" stroke="#37474f" stroke-width="3" fill="none"/>
-  <text x="470" y="108" fill="#37474f" font-weight="700" font-size="15">線D</text>
-  <!-- テープの電源線 -->
-  <path d="M330 70 L330 268" stroke="#c62828" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-  <path d="M380 160 L380 286" stroke="#37474f" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-  <!-- データと GND -->
-  <path d="M600 268 L600 205 L700 205 L700 136 L740 136" stroke="#2e7d32" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-  <path d="M640 286 L640 215 L720 215 L720 158 L740 158" stroke="#37474f" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-</svg>
-<div class="cap">実線（線A〜D）は、スピーカーケーブルを切って作る短い線です。点線はテープに最初から付いている線です。</div>
-</div>
-
-<table>
-  <tr><th style="width:14%">線</th><th style="width:38%">片方の端</th><th>もう片方の端</th></tr>
-  <tr><td><span class="p">線A</span></td><td>DCジャックコネクターの<span class="p">赤いボタン（＋）</span></td><td><span class="p">＋側</span>コネクター（3本用）</td></tr>
-  <tr><td><span class="m">線B</span></td><td>DCジャックコネクターの<span class="m">黒いボタン（－）</span></td><td><span class="m">－側</span>コネクター（5本用）</td></tr>
-  <tr><td><span class="p">線C</span></td><td><span class="p">＋側</span>コネクター（3本用）</td><td>OCTO の POWER <span class="p">＋</span>（右）</td></tr>
-  <tr><td><span class="m">線D</span></td><td><span class="m">－側</span>コネクター（5本用）</td><td>OCTO の POWER <span class="m">－</span>（左）</td></tr>
-</table>
-<p style="font-size:9.5pt">どの線も同じスピーカーケーブルなので、見分けがつくように、<b>＋に使う線A・線C はケーブルの印（線や文字）のある側</b>、<b>－に使う線B・線D は印のない側</b>から取ると間違えにくくなります。両端にマスキングテープで「A」「B」などと書いておくのもおすすめです。</p>
-
-<h3>3-2. 電線を用意する</h3>
-<p>線A〜D は、部品の<b>スピーカーケーブル</b>（16ゲージ・銅線2本が並んだケーブル）を切って作ります。</p>
-<ol>
-  <li>スピーカーケーブルを 10〜15cm に4本切ります（線A〜D）。2本ずつ線が並んでいるので、裂いて1本ずつにします。</li>
-  <li>すべての線の両端の被覆を約1cm むきます。</li>
-</ol>
-<table>
-  <tr><th style="width:30%">使う場所</th><th style="width:34%">作る線</th><th>本数</th></tr>
-  <tr><td>3章（テープ1）</td><td>線A・B・C・D</td><td>4本</td></tr>
-  <tr><td>7章（テープ2〜5）</td><td>線A・B（OCTO に行かないので C・D はなし）</td><td>4本 × 2 ＝ 8本</td></tr>
-  <tr><td colspan="2"><b>合計</b></td><td><b>12本</b>（10〜15cm なら全部で 2m 未満）</td></tr>
-</table>
-<ul style="font-size:9.5pt">
-  <li><b>なぜスピーカーケーブルか：</b>16ゲージ（約 1.3mm²）と太いので、アダプターの 5A を流しても熱くなりにくいからです。2本のうち片方に線や文字の印があるので、＋と－を見分けやすい点も便利です。</li>
-  <li><b>使わないところ：</b>データ線（緑）には使いません。データは、テープの付属コネクター、ギフトコネクター、予備の 3ピン JST コネクターでつなぎます。</li>
-  <li>アダプターとテープが離れている場合は、その分だけ長く切ってかまいません。30.5m あるので十分に余ります。</li>
-</ul>
-
-<h3>3-3. アダプターに線A・線B をつなぐ</h3>
-<div class="fig"><img src="img/adapter_jack.jpg" alt="ACアダプターと DCジャック プッシュ式コネクター"><div class="cap">ACアダプターの先に、DCジャック プッシュ式コネクターを差し込んだ状態</div></div>
-<ol>
-  <li>アダプターの丸い DC プラグに、付属の <b>DCジャック プッシュ式コネクター</b>を奥まで差し込みます（写真の状態）。</li>
-  <li><span class="p">赤いボタン</span>を押し込んだまま、ボタンのすぐ下の穴に<span class="p">線A</span> の片方の端を差し込み、ボタンを離します。</li>
-  <li><span class="m">黒いボタン</span>を押し込んだまま、同じように<span class="m">線B</span> の片方の端を差し込み、ボタンを離します。</li>
-  <li>線を軽く引っ張って、抜けなければ OK です。</li>
-</ol>
-<div class="note warn"><b>重要：</b>赤が <span class="p">＋</span>、黒が <span class="m">－</span> です。逆につなぐと、テープや OCTO が壊れるおそれがあります。アダプターをコンセントに差すのは、4章で配線をすべて確認してからです。</div>
-
-<h3>3-4. ＋側をつなぐ（3本用コネクター）</h3>
-<ol>
-  <li>3本用コネクターに、<span class="p">線A</span> のもう片方の端・テープの<span class="p">赤い電圧付加ワイヤ</span>・OCTO へ行く<span class="p">線C</span> を差します。</li>
-</ol>
-
-<h3>3-5. －側をつなぐ（5本用コネクター）</h3>
-<ol>
-  <li>5本用コネクターに、<span class="m">線B</span> のもう片方の端・テープの<span class="m">白い電圧付加ワイヤ</span>・OCTO へ行く<span class="m">線D</span> を差します。</li>
-</ol>
-
-<h3>3-6. OCTO につなぐ</h3>
-<ol>
-  <li><span class="p">線C</span> を POWER の<span class="p">右（＋）</span>に、<span class="m">線D</span> を POWER の<span class="m">左（－）</span>に差し、上のネジをドライバーで締めます。</li>
-  <li>ギフトコネクターの<span class="d">緑の線（データ）</span>を、ポート1の<span class="d">左から2番目（DATA）</span>に固定します。</li>
-  <li>ギフトコネクターの<span class="m">白い線（GND）</span>を、ポート1の<span class="m">左端（V－）</span>に固定します。</li>
-  <li>ギフトコネクターの<b>赤い線は使いません</b>。先端をビニールテープで巻き、他の金属に触れないようにします。ポート1の CLK と V＋ には何もつなぎません。</li>
-  <li>ギフトコネクターを、テープ入力側のメスコネクターに差し込みます。</li>
-  <li>テープの<b>出力側</b>（反対の端）にも赤・白の電線が出ています。12V が来ているので、先端をビニールテープで巻いて絶縁します（7-3 の写真参照）。</li>
-</ol>
-
-<div class="note"><b>なぜ赤い線を使わないのか：</b>電源は太い電圧付加ワイヤからだけ入れます。コネクターの細い線に大きな電流が流れないようにするためです。<br>
-<b>差す前に確認：</b>ギフトコネクターをテープのメスコネクターにはめてみて、<span class="d">緑どうし</span>がつながることを確かめてください。製品によって並び順が違う場合があります。</div>
-
-<div class="row">
-  <div class="fig" style="flex:0 0 80mm"><img src="img/connector_lever.jpg" alt="ワンタッチコネクターのレバー"><div class="cap">ワンタッチコネクター</div></div>
-  <div class="text">
-    <p><b>ワンタッチコネクターの使い方</b></p>
-    <ol>
-      <li>青いレバーを上げます。</li>
-      <li>被覆をむいた電線を、奥まで差し込みます。</li>
-      <li>レバーを下げて固定します。</li>
-      <li>軽く引っ張って、抜けなければ OK です。</li>
-    </ol>
-    <p style="font-size:9.5pt">同じコネクターに差した電線どうしは、すべてつながります。使わない差し込み口は空けたままでかまいません。</p>
-  </div>
-</div>
-<p style="font-size:9.5pt">OCTO からテープまでのデータ線（ギフトコネクターの線）は、<b>3m 以内</b>にしてください。</p>
-
-<h2>4. 電源を入れる前のチェック</h2>
-<ul class="check">
-  <li>＋ と － が入れ替わっていない（赤い線どうし・白い線どうしが同じコネクターにある）</li>
-  <li>DCジャックコネクターの赤いボタンに線A、黒いボタンに線B が入っている</li>
-  <li>ワンタッチコネクターのレバーがすべて下がり、電線を軽く引いても抜けない</li>
-  <li>緑の線がポート1の DATA、白い線がポート1の V－ に入っている（POWER 端子ではない）</li>
-  <li>POWER の左が －（線D）、右が ＋（線C）になっている</li>
-  <li>使わない赤い線（ギフトコネクター）の先端が絶縁されている</li>
-  <li>テープ出力側の赤・白の電線の先端が絶縁されている</li>
-  <li>OCTO は入力側（矢印が始まる側）につながっている</li>
-  <li>むき出しの銅線どうしが触れ合っていない</li>
-</ul>
-
-<h2>5. OCTO の設定（PC から）</h2>
-<p>OCTO は初期設定が WS2812B 用になっているので、最初に一度、このテープ（WS2811）に合わせて設定します。設定は OCTO 本体に保存されるので、次からは不要です。</p>
-
-<h3>5-1. PC と OCTO をつなぐ</h3>
-<ol>
-  <li>ACアダプターをコンセントに差します。OCTO のランプが点灯します。テープはまだ光りません。</li>
-  <li>LAN ケーブルで、PC と OCTO の <b>ETHERNET IN</b> を直接つなぎます。</li>
-  <li>PC の有線 LAN の IP アドレスを、手動で次のように設定します。<br>
-    <b>IP アドレス：192.168.0.20</b>　<b>サブネットマスク：255.255.255.0</b><br>
-    <span style="font-size:9.5pt">Windows：設定 → ネットワークとインターネット → イーサネット → IP 割り当ての「編集」→「手動」→ IPv4 をオン</span></li>
-</ol>
-<p style="font-size:9.5pt">OCTO は初期設定で DHCP ですが、ルーターがない環境では <b>192.168.0.10</b> になります。ルーターにつなぐ場合は、ルーターが割り当てた IP を使います。</p>
-
-<h3>5-2. 設定画面を開く</h3>
-<ol>
-  <li>ブラウザ（Chrome 推奨）のアドレス欄に <b>192.168.0.10</b> と入力します。</li>
-  <li>「保護されていない通信」と表示されますが、そのまま進んで問題ありません。</li>
-</ol>
-<p style="font-size:9.5pt">開けないときは、ENTTEC の無料ソフト <b>EMU</b> を使うと、ネットワーク上の OCTO を探して設定画面を開けます。</p>
-
-<h3>5-3. テープに合わせて設定する</h3>
-<table>
-  <tr><th style="width:40%">場所</th><th style="width:28%">項目</th><th>設定値</th></tr>
-  <tr><td>Settings → Pixel Mapping Options</td><td>Input Protocol</td><td><b>Art-Net</b>（初期値のまま）</td></tr>
-  <tr><td>Settings → Output Settings（ポート1）</td><td>LED Protocol</td><td><b>WS2811</b></td></tr>
-  <tr><td>Settings → Output Settings（ポート1）</td><td>Mapped Pixels</td><td><b>100</b></td></tr>
-  <tr><td>Settings → Output Settings（ポート1）</td><td>開始ユニバース</td><td><b>0</b></td></tr>
-</table>
-<p>最後に <b>Save</b> を押します。保存しないと反映されません。</p>
-<p style="font-size:9.5pt">100ピクセル × RGB 3チャンネル = 300チャンネルなので、テープ1本は Art-Net の<b>ユニバース1つ</b>に収まります（1ユニバースは 512チャンネル、RGB で最大170ピクセル）。</p>
-
-<h2>6. TouchDesigner から点灯する</h2>
-<p>PC と OCTO を 5章のとおりつないだまま、TouchDesigner で次の3つのオペレーターをつなぎます。</p>
-<table>
-  <tr><th style="width:24%">オペレーター</th><th style="width:28%">パラメーター</th><th>設定値</th></tr>
-  <tr><td><b>Pattern CHOP</b></td><td>Length</td><td><b>300</b>（100ピクセル × RGB）</td></tr>
-  <tr><td><b>Math CHOP</b></td><td>Range タブ</td><td>From Range <b>-1〜1</b> → To Range <b>0〜255</b></td></tr>
-  <tr><td rowspan="6"><b>DMX Out CHOP</b></td><td>Interface</td><td><b>Art-Net</b></td></tr>
-  <tr><td>Network Address</td><td><b>192.168.0.10</b>（OCTO の IP）</td></tr>
-  <tr><td>Net／Subnet／Universe</td><td><b>0／0／0</b>（OCTO の開始ユニバース 0 に合わせる）</td></tr>
-  <tr><td>Format</td><td><b>Packet Per Channel</b>（1チャンネルの 300サンプルを DMX チャンネルとして送る）</td></tr>
-  <tr><td>Rate</td><td><b>44</b> 以下</td></tr>
-  <tr><td>Active</td><td>オン</td></tr>
-</table>
-<ul>
-  <li>テープに色の波が表示されれば成功です。Pattern CHOP の値を変えると、表示も変わります。</li>
-  <li>値は <b>0〜255</b> で送ります。サンプル 0・1・2 が1つ目のピクセルの R・G・B、3・4・5 が2つ目のピクセル…と並びます。</li>
-  <li>DMX Out CHOP を<b>オフ（Active をオフ）</b>にすると、送信が止まります。</li>
-</ul>
-<div class="note warn"><b>注意：</b>白の最大輝度（すべて 255）は、5m だとアダプターの容量（60W）を超えるおそれがあります。長時間つけるときは、明るさを抑えてください。</div>
-
-<h2>7. テープ5本をつなぐ</h2>
-<p>3〜6章でテープ1本が点灯したら、残りの4本を足して5本にします。OCTO の出力ポートは2つなので、<b>ポート1にテープ1〜3、ポート2にテープ4〜5</b>をつなぎます。</p>
-
-<div class="fig">
-<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="12">
-  <!-- アダプター -->
+<svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI, Meiryo, sans-serif" font-size="13">
   <g font-weight="700" text-anchor="middle">
     <rect x="20" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="75" y="47">アダプター1</text>
     <rect x="200" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="255" y="47">アダプター2</text>
     <rect x="380" y="20" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="435" y="47">アダプター3</text>
-    <rect x="200" y="270" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="255" y="297">アダプター4</text>
-    <rect x="380" y="270" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="435" y="297">アダプター5</text>
+    <rect x="200" y="260" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="255" y="287">アダプター4</text>
+    <rect x="380" y="260" width="110" height="44" rx="5" fill="#f6f6f4" stroke="#1a1a1a"/><text x="435" y="287">アダプター5</text>
   </g>
-  <!-- OCTO -->
-  <rect x="20" y="150" width="110" height="120" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>
-  <text x="75" y="172" text-anchor="middle" font-weight="700">OCTO MK3</text>
-  <text x="34" y="196">POWER</text>
+  <rect x="20" y="150" width="110" height="110" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>
+  <text x="75" y="172" text-anchor="middle" font-weight="700">OCTO</text>
+  <text x="34" y="200">でんげん</text>
   <text x="34" y="226">ポート1</text>
-  <text x="34" y="256">ポート2</text>
-  <!-- テープ -->
+  <text x="34" y="250">ポート2</text>
   <g font-weight="700">
     <rect x="160" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="170" y="142">テープ1</text>
     <rect x="345" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="355" y="142">テープ2</text>
     <rect x="530" y="120" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="540" y="142">テープ3</text>
-    <rect x="160" y="350" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="170" y="372">テープ4</text>
-    <rect x="345" y="350" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="355" y="372">テープ5</text>
+    <rect x="160" y="340" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="170" y="362">テープ4</text>
+    <rect x="345" y="340" width="160" height="34" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="355" y="362">テープ5</text>
   </g>
-  <g fill="#555"><text x="270" y="142">→</text><text x="455" y="142">→</text><text x="640" y="142">→</text><text x="270" y="372">→</text><text x="455" y="372">→</text></g>
-  <!-- 電源（＋は各アダプターから自分のテープだけ） -->
-  <g stroke="#c62828" stroke-width="2.5" fill="none">
+  <g fill="#555"><text x="270" y="142">→</text><text x="455" y="142">→</text><text x="640" y="142">→</text><text x="270" y="362">→</text><text x="455" y="362">→</text></g>
+  <g stroke="#c62828" stroke-width="3" fill="none">
     <path d="M110 64 L110 100 L175 100 L175 120"/>
     <path d="M255 64 L255 100 L360 100 L360 120"/>
     <path d="M435 64 L435 90 L545 90 L545 120"/>
-    <path d="M255 314 L255 335 L175 335 L175 350"/>
-    <path d="M435 314 L435 335 L360 335 L360 350"/>
+    <path d="M255 304 L255 325 L175 325 L175 340"/>
+    <path d="M435 304 L435 325 L360 325 L360 340"/>
     <path d="M40 64 L40 150"/>
   </g>
-  <text x="46" y="110" fill="#c62828" font-size="11">線C・D</text>
-  <!-- データ（緑の太線）：OCTO → 1本目、テープどうしはジャンパー -->
-  <g stroke="#2e7d32" stroke-width="3" fill="none">
+  <g stroke="#2e7d32" stroke-width="4" fill="none">
     <path d="M130 222 L145 222 L145 137 L160 137"/>
-    <path d="M130 252 L145 252 L145 367 L160 367"/>
+    <path d="M130 246 L145 246 L145 357 L160 357"/>
     <path d="M320 137 L345 137"/>
     <path d="M505 137 L530 137"/>
-    <path d="M320 367 L345 367"/>
+    <path d="M320 357 L345 357"/>
   </g>
-  <g fill="#2e7d32" font-size="11" text-anchor="middle">
-    <text x="332" y="175">ジャンパー</text>
-    <text x="517" y="175">ジャンパー</text>
-    <text x="332" y="405">ジャンパー</text>
+  <g fill="#2e7d32" font-size="12" text-anchor="middle">
+    <text x="332" y="176">ジャンパー</text><text x="517" y="176">ジャンパー</text><text x="332" y="396">ジャンパー</text>
   </g>
-  <!-- 凡例 -->
-  <g font-size="11">
-    <line x1="560" y1="250" x2="590" y2="250" stroke="#c62828" stroke-width="2.5"/><text x="596" y="254">電源 ＋／－</text>
-    <line x1="560" y1="275" x2="590" y2="275" stroke="#2e7d32" stroke-width="3"/><text x="596" y="279">データ＋GND（緑・白）</text>
-    <text x="560" y="304" fill="#555">→ はデータの向き（矢印）</text>
-    <text x="560" y="324" fill="#555">ポート1：ユニバース 0・1</text>
-    <text x="560" y="344" fill="#555">ポート2：ユニバース 2・3</text>
+  <g font-size="13">
+    <line x1="545" y1="230" x2="580" y2="230" stroke="#c62828" stroke-width="3"/><text x="588" y="235">でんき（でんげん）</text>
+    <line x1="545" y1="258" x2="580" y2="258" stroke="#2e7d32" stroke-width="4"/><text x="588" y="263">しんごう（データ）</text>
+    <text x="545" y="292" fill="#555">→ は テープの やじるしの むき</text>
   </g>
 </svg>
-<div class="cap">テープ5本の全体図。電源は各テープの入力側に、そのテープ専用のアダプターから入れます。</div>
+<div class="cap">ぜんたいの <ruby>図<rt>ず</rt></ruby>。テープ1つに アダプターが1つ。OCTO は テープ1・テープ4 に しんごうを おくります。</div>
 </div>
-
-<div class="fig" style="width:110mm"><img src="img/wiring_diagram.png" alt="配電配線図"><div class="cap">参考：販売ページの配電配線図。大きな電源1台から複数のテープに給電する場合で、今回のようにテープごとにアダプターを分けるときは、テープどうしの 12V をつなぎません。</div></div>
-
-<h3>7-1. 電源の考え方</h3>
-<table>
-  <tr><th style="width:24%">アダプター</th><th>つなぐ先</th></tr>
-  <tr><td>アダプター1</td><td>テープ1 ＋ OCTO（3章のとおり。線C・線D で OCTO にも電源を入れる）</td></tr>
-  <tr><td>アダプター2〜5</td><td>それぞれ自分のテープだけ（線C・線D は不要）</td></tr>
-</table>
 <ul>
-  <li><b>アダプターどうしの <span class="p">＋</span> は絶対につなぎません。</b>テープとテープの間の <span class="p">12V</span> もつなぎません。</li>
-  <li><span class="m">－（GND）</span>は、テープどうしをつなぐジャンパーの白い線で、すべて共通になります。データ信号を正しく伝えるために必要です。</li>
-  <li>OCTO の電源は 5W 程度なので、アダプター1から取って問題ありません。</li>
-  <li>アダプター5個は、電源タップにまとめて差します。</li>
+  <li><b>アダプター</b>は、コンセントの でんきを テープ<ruby>用<rt>よう</rt></ruby>の でんき（12V）に かえる はこです。テープ1<ruby>本<rt>ほん</rt></ruby>に 1<ruby>個<rt>こ</rt></ruby> つかいます。</li>
+  <li><b>OCTO</b>（オクト）は、「どの LED を なにいろに 光らせるか」という <b>しんごう</b>を テープに おくる きかいです。</li>
+  <li>テープは でんきだけでは 光りません。<b>でんき と しんごう の りょうほう</b>が ひつようです。</li>
 </ul>
 
-<h3>7-2. テープ2〜5の電源をつなぐ</h3>
-<p>テープ2〜5は、3章の 3-3 と同じようにアダプターに線A・線B をつなぎ、次のように接続します。OCTO には行かないので、線C・線D は作りません。</p>
-<ol>
-  <li><span class="p">線A</span> のもう片方の端と、テープの<span class="p">赤い電圧付加ワイヤ</span>を、3本用コネクターでつなぎます。</li>
-  <li><span class="m">線B</span> のもう片方の端と、テープの<span class="m">白い電圧付加ワイヤ</span>を、5本用コネクターでつなぎます。</li>
-</ol>
+<!-- ================================================================ -->
+<h2>2. つかう もの</h2>
+<table>
+  <tr><th style="width:44%">もの</th><th style="width:14%">かず</th><th>どこで つかう？</th></tr>
+  <tr><td>LEDテープ（5m）</td><td>5</td><td>光らせる テープ</td></tr>
+  <tr><td>ACアダプター 12V 5A</td><td>5</td><td>テープの でんき（ステップ4）</td></tr>
+  <tr><td>DCジャック プッシュ<ruby>式<rt>しき</rt></ruby>コネクター（<ruby>赤<rt>あか</rt></ruby>と<ruby>黒<rt>くろ</rt></ruby>の ボタン つき）</td><td>5</td><td>アダプターに つける（ステップ4）</td></tr>
+  <tr><td>ENTTEC OCTO MK3</td><td>1</td><td>しんごうを おくる きかい</td></tr>
+  <tr><td>スピーカーケーブル（どうせん）</td><td>1まき</td><td>でんきの <ruby>線<rt>せん</rt></ruby>を つくる（ステップ3）</td></tr>
+  <tr><td>ワンタッチコネクター 3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby>（JAPPY）</td><td>11</td><td>＋の まとめ 5・ジャンパー 6</td></tr>
+  <tr><td>ワンタッチコネクター 5<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby>（WAGO）</td><td>5</td><td>－の まとめ</td></tr>
+  <tr><td>3ピン コネクター（オス・メス セット）</td><td>3セット</td><td>ジャンパー（ステップ9）</td></tr>
+  <tr><td>ギフト3ピンコネクター（テープの はこに 入っている）</td><td>2</td><td>OCTO と テープ（ステップ8）</td></tr>
+  <tr><td>でんげんタップ（6こ<ruby>口<rt>ぐち</rt></ruby>）</td><td>1</td><td>アダプター5<ruby>個<rt>こ</rt></ruby>を さす</td></tr>
+  <tr><td>LANケーブル</td><td>1</td><td>OCTO と パソコン（おとなの人が つかう）</td></tr>
+</table>
+<p><b>どうぐ：</b>ワイヤーストリッパー（または ニッパー）、ほそい マイナスドライバー、ビニールテープ、マスキングテープ、ペン、ものさし</p>
 
-<h3>7-3. ジャンパーを作る（3本）</h3>
+<!-- ================================================================ -->
+<h2>3. ぶひんを よく 見よう</h2>
+
+<h3>LEDテープの 2つの はし</h3>
 <div class="row">
-  <div class="fig" style="flex:0 0 80mm"><img src="img/tape_input_end.jpg" alt="テープの入力側の端"><div class="cap">入力側の端（矢印がテープの奥へ向く側）</div></div>
-  <div class="fig" style="flex:1"><img src="img/tape_output_end.jpg" alt="テープの出力側の端"><div class="cap">出力側の端</div></div>
+  <div class="fig" style="flex:0 0 80mm"><img src="img/tape_input_end.jpg" alt="テープの入力側の端"><div class="cap"><ruby>入<rt>にゅう</rt></ruby><ruby>力<rt>りょく</rt></ruby><ruby>側<rt>がわ</rt></ruby>（しんごうが 入る はし）</div></div>
+  <div class="fig" style="flex:1"><img src="img/tape_output_end.jpg" alt="テープの出力側の端"><div class="cap"><ruby>出<rt>しゅつ</rt></ruby><ruby>力<rt>りょく</rt></ruby><ruby>側<rt>がわ</rt></ruby>（しんごうが 出る はし）</div></div>
 </div>
-<p>テープの両端には、どちらも<b>3ピンのコネクター</b>と<b>赤・白の電線</b>が付いています。入力側は<b>メス</b>、出力側は<b>オス</b>のコネクターです。</p>
-<p>前のテープの出力側から次のテープの入力側へ、<b>データと GND だけ</b>を渡す短い線（ジャンパー）を作ります。テープ1→2、2→3、4→5 の3か所に使います。予備の <b>3ピン JST コネクター</b>から、メスとオスを1個ずつ使います。</p>
-<ol>
-  <li><b>メス</b>のコネクター（前のテープの出力側オスに差す側）と、<b>オス</b>のコネクター（次のテープの入力側メスに差す側）を用意します。</li>
-  <li><span class="d">緑どうし</span>、<span class="m">白どうし</span>をワンタッチコネクターでつなぎます。</li>
-  <li><b>赤どうしはつなぎません。</b>両方の赤い線の先端をビニールテープで巻いて絶縁します。</li>
-  <li>前のテープの出力側オスにジャンパーのメスを、次のテープの入力側メスにジャンパーのオスを差し込みます。</li>
-</ol>
-<div class="note warn"><b>重要：</b>テープどうしのコネクターを<b>直接</b>差し込まないでください。形は合いますが、赤い線（12V）を通して、アダプターどうしの ＋ がつながってしまいます。<br>
-<b>出力側の赤・白の電線</b>は、テープの 12V と GND につながっています。今回は使わないので、<b>どのテープも先端をビニールテープで絶縁</b>してください。最後のテープ（テープ3・テープ5）も同じです。</div>
-
-<h3>7-4. OCTO につなぐ</h3>
 <ul>
-  <li><b>ポート1：</b>テープ1の入力側（3章のとおり）。</li>
-  <li><b>ポート2：</b>テープ4の入力側。ギフトコネクターの<span class="d">緑</span>をポート2の DATA（左から2番目）、<span class="m">白</span>をポート2の V－（左端）に固定します。</li>
-  <li>OCTO からテープ1・テープ4 の入力側までのデータ線は、それぞれ <b>3m 以内</b>にします。テープどうしのジャンパーは、短ければ長さの制限を気にしなくてかまいません。</li>
+  <li>テープには <b>やじるし（→）</b>が かいてあります。<b>やじるしが はじまる ほうが「入力側」</b>、やじるしが むかう ほうが「出力側」です。</li>
+  <li>入力側には <b>メスの コネクター</b>（あなが あいている）、出力側には <b>オスの コネクター</b>（でっぱりが ある）が ついています。</li>
+  <li>どちらの はしにも、コネクターとは べつに <span class="p"><ruby>赤<rt>あか</rt></ruby></span>と<span class="m"><ruby>白<rt>しろ</rt></ruby></span>の <ruby>線<rt>せん</rt></ruby>が 出ています。<span class="p">赤＝＋</span>、<span class="m">白＝－</span>です。</li>
 </ul>
 
-<h3>7-5. OCTO の設定を変える</h3>
-<table>
-  <tr><th style="width:22%">ポート</th><th style="width:20%">LED Protocol</th><th style="width:20%">Mapped Pixels</th><th>開始ユニバース</th></tr>
-  <tr><td>ポート1</td><td>WS2811</td><td><b>300</b>（テープ1〜3）</td><td><b>0</b>（0・1 を使う）</td></tr>
-  <tr><td>ポート2</td><td>WS2811</td><td><b>200</b>（テープ4〜5）</td><td><b>2</b>（2・3 を使う）</td></tr>
-</table>
-<p style="font-size:9.5pt">1ユニバースに入るのは RGB で170ピクセルまでなので、300ピクセルは2ユニバース、200ピクセルも2ユニバースを使います。OCTO は続きのユニバースを自動で使います。最後に <b>Save</b> を押します。</p>
+<h3>OCTO の あな（たんし）</h3>
+<div class="fig"><img src="img/octo_terminals.jpg" alt="OCTO MK3 の端子"><div class="cap">OCTO の みどりの ブロック。なまえが 見えにくいので、しゃしんに かきこみました。</div></div>
+<ul>
+  <li><b>POWER（いちばん左の 2つの あな）</b>：OCTO の でんき。<span class="m">左が －</span>、<span class="p">右が ＋</span>。</li>
+  <li><b>ポート1（右の 4つの あな）</b>と <b>ポート2（まんなかの 4つの あな）</b>：テープに しんごうを おくる ところ。どちらも 左から <span class="m">V－</span>・<span class="d">DATA</span>・CLK・V＋ です。</li>
+  <li>つかうのは <span class="m">V－（左はし）</span>と <span class="d">DATA（左から2つめ）</span>だけ。CLK と V＋ には なにも さしません。</li>
+  <li>あなの 上に ある ねじを ドライバーで ゆるめて、<ruby>線<rt>せん</rt></ruby>を 入れて、ねじを しめて とめます。</li>
+</ul>
 
-<h3>7-6. TouchDesigner の設定を変える</h3>
-<p>全体で 500ピクセル（1,500チャンネル）になります。Pattern CHOP の Length を <b>1500</b> にし、<b>Trim CHOP</b> で4つに分けて、それぞれ DMX Out CHOP に送ります。Trim CHOP は範囲の単位を<b>サンプル</b>にして指定します。</p>
-<table>
-  <tr><th style="width:24%">DMX Out CHOP</th><th style="width:22%">Universe</th><th style="width:26%">Trim の範囲（サンプル）</th><th>テープ</th></tr>
-  <tr><td>1つ目</td><td>0</td><td>0〜509</td><td>テープ1〜2の前半（1〜170ピクセル）</td></tr>
-  <tr><td>2つ目</td><td>1</td><td>510〜899</td><td>テープ2の後半〜3（171〜300ピクセル）</td></tr>
-  <tr><td>3つ目</td><td>2</td><td>900〜1409</td><td>テープ4〜5の前半（301〜470ピクセル）</td></tr>
-  <tr><td>4つ目</td><td>3</td><td>1410〜1499</td><td>テープ5の後半（471〜500ピクセル）</td></tr>
-</table>
-<p style="font-size:9.5pt">DMX Out CHOP の Interface・Network Address・Format・Rate は、6章と同じです。Net と Subnet は 0 のままです。</p>
+<h3>アダプター と ワンタッチコネクター</h3>
+<div class="fig"><img src="img/adapter_jack.jpg" alt="ACアダプター"><div class="cap">アダプターの さきに、DCジャック プッシュ式コネクターを さした ところ</div></div>
+<div class="row">
+  <div class="fig" style="flex:0 0 82mm"><img src="img/connector_lever.jpg" alt="ワンタッチコネクター"><div class="cap">ワンタッチコネクター</div></div>
+  <div class="text">
+    <p><b>ワンタッチコネクターの つかいかた</b></p>
+    <ol>
+      <li>あおい レバーを 上げる。</li>
+      <li><ruby>線<rt>せん</rt></ruby>の はだかの ところを、おくまで さす。</li>
+      <li>レバーを 下げる。</li>
+      <li>かるく ひっぱって、ぬけなければ OK。</li>
+    </ol>
+    <p class="small">おなじ コネクターに さした <ruby>線<rt>せん</rt></ruby>どうしは、ぜんぶ つながります。</p>
+  </div>
+</div>
 
-<h2>8. 点灯しないとき</h2>
-<table>
-  <tr><th style="width:32%">症状</th><th>対処</th></tr>
-  <tr><td>OCTO のランプが点かない</td><td>OCTO の電源配線（線C・線D）と、DCジャックコネクターの差し込みを確認します。</td></tr>
-  <tr><td>OCTO は点くが、テープが光らない</td><td>
-    ① OCTO が入力側（矢印が始まる側）につながっているか確認します。<br>
-    ② 緑の線がポート1の DATA（左から2番目）、白い線が V－（左端）に入っているか確認します。<br>
-    ③ 5章の設定（WS2811・100ピクセル）が保存されているか確認します。</td></tr>
-  <tr><td>設定画面が開けない</td><td>PC の IP が 192.168.0.20／255.255.255.0 になっているか、LAN ケーブルが ETHERNET IN に差さっているか確認します。Wi-Fi をオフにすると通ることがあります。</td></tr>
-  <tr><td>TouchDesigner から送っても光らない</td><td>
-    ① DMX Out CHOP の Network Address が OCTO の IP、Net／Subnet／Universe が OCTO の開始ユニバースと同じか確認します。<br>
-    ② Format が Packet Per Channel になっているか確認します。<br>
-    ③ Windows のファイアウォールで TouchDesigner の通信が許可されているか確認します。</td></tr>
-  <tr><td>色が指定と違う</td><td>故障ではありません。OCTO の設定画面で、色の並び順（RGB／GRB など）を変更します。</td></tr>
-  <tr><td>途中から先が光らない</td><td>光らなくなった位置の直前で、データの線やつなぎ目が切れていないか確認します。</td></tr>
-  <tr><td>先のほうが暗い・色が変わる</td><td>電圧不足です。そのテープのアダプターの配線（線A・線B）を確認します。</td></tr>
-  <tr><td>異常に熱い・焦げたにおい</td><td>すぐにコンセントを抜き、＋ と － の配線を確認してください。</td></tr>
-</table>
+<!-- ================================================================ -->
+<h2>4. くみたて</h2>
 
-<div class="note"><b>安全について：</b>作業する電線は、すべてアダプターを通した 12V なので感電の危険はほとんどありません。ただし、配線を変えるときは必ずコンセントを抜いてから行ってください。</div>
+<div class="step"><span class="num">ステップ1</span><span class="title">テープに 1〜5 の ばんごうを つける</span>
+<ol>
+  <li>マスキングテープを 10<ruby>枚<rt>まい</rt></ruby> きって、「1」〜「5」を 2<ruby>枚<rt>まい</rt></ruby>ずつ かきます。</li>
+  <li>テープの まき（リール）と、<b>入力側の はし</b>に、おなじ ばんごうを はります。</li>
+  <li>アダプターにも「1」〜「5」を はります。テープと アダプターは おなじ ばんごうどうしで つかいます。</li>
+</ol>
+<p class="done">□ できた</p></div>
+
+<div class="step"><span class="num">ステップ2</span><span class="title">ならべる</span>
+<ol>
+  <li>1ページの <ruby>図<rt>ず</rt></ruby>のように、テープ1→2→3 を ひとつめの れつ、テープ4→5 を ふたつめの れつに ならべます。</li>
+  <li>やじるしが、テープ1 から テープ3 の ほうへ、テープ4 から テープ5 の ほうへ むくように おきます。</li>
+  <li>OCTO は、テープ1 と テープ4 の 入力側の ちかく（3m いない）に おきます。</li>
+</ol>
+<p class="done">□ できた</p></div>
+
+<div class="step"><span class="num">ステップ3</span><span class="title">でんきの <ruby>線<rt>せん</rt></ruby>を 12<ruby>本<rt>ほん</rt></ruby> つくる</span>
+<p>スピーカーケーブルは、どうせんが 2<ruby>本<rt>ほん</rt></ruby> くっついた ケーブルです。かたほうに <b>しるし（すじや もじ）</b>が あります。</p>
+<ol>
+  <li>スピーカーケーブルを <b>15cm</b> に 6<ruby>本<rt>ほん</rt></ruby> きります。</li>
+  <li>1<ruby>本<rt>ほん</rt></ruby>ずつ まんなかで さいて、2<ruby>本<rt>ほん</rt></ruby>に わけます。ぜんぶで <b>12<ruby>本<rt>ほん</rt></ruby></b>に なります。</li>
+  <li><b>しるしの ある <ruby>線<rt>せん</rt></ruby></b>は ＋に つかいます。マスキングテープで「A1」〜「A5」と「C」を はります（6<ruby>本<rt>ほん</rt></ruby>）。</li>
+  <li><b>しるしの ない <ruby>線<rt>せん</rt></ruby></b>は －に つかいます。「B1」〜「B5」と「D」を はります（6<ruby>本<rt>ほん</rt></ruby>）。</li>
+  <li>12<ruby>本<rt>ほん</rt></ruby> ぜんぶ、<b>りょうはしの かわを 1cm</b> むきます。</li>
+</ol>
+<div class="adult">ワイヤーストリッパーで かわを むくときは、おとなの人と いっしょに やりましょう。中の どうせんを きらないように ちゅういします。</div>
+<table>
+  <tr><th style="width:18%"><ruby>線<rt>せん</rt></ruby></th><th>つなぐ ところ</th></tr>
+  <tr><td><span class="p">A1〜A5</span></td><td>アダプターの <span class="p">赤い ボタン（＋）</span> → テープの <span class="p">赤い 線</span></td></tr>
+  <tr><td><span class="m">B1〜B5</span></td><td>アダプターの <span class="m">黒い ボタン（－）</span> → テープの <span class="m">白い 線</span></td></tr>
+  <tr><td><span class="p">C</span></td><td>テープ1 の ＋ → OCTO の POWER ＋</td></tr>
+  <tr><td><span class="m">D</span></td><td>テープ1 の － → OCTO の POWER －</td></tr>
+</table>
+<p class="done">□ できた</p></div>
+
+<div class="step"><span class="num">ステップ4</span><span class="title">アダプターに <ruby>線<rt>せん</rt></ruby>を つける（5<ruby>個<rt>こ</rt></ruby>とも）</span>
+<p>アダプター1 から じゅんばんに、5<ruby>個<rt>こ</rt></ruby> ぜんぶ おなじように やります。</p>
+<ol>
+  <li>アダプターの まるい さきっぽに、DCジャック プッシュ式コネクターを おくまで さします（5ページの しゃしん）。</li>
+  <li><span class="p">赤い ボタン</span>を ゆびで おしたまま、ボタンの すぐ下の あなに <span class="p">A</span>（アダプター1 なら A1）を さして、ゆびを はなします。</li>
+  <li><span class="m">黒い ボタン</span>を おしたまま、<span class="m">B</span>（アダプター1 なら B1）を さして、ゆびを はなします。</li>
+  <li>かるく ひっぱって、ぬけないか たしかめます。</li>
+</ol>
+<div class="note warn"><b>ちゅうい：</b><span class="p">赤＝＋</span>、<span class="m">黒＝－</span>。ぎゃくに すると、こわれることが あります。</div>
+<p class="done">□ 1　□ 2　□ 3　□ 4　□ 5　できた</p></div>
+
+<div class="step"><span class="num">ステップ5</span><span class="title">テープ2〜5 に でんきを つなぐ</span>
+<p>テープ2・3・4・5 の 入力側で、おなじように やります。</p>
+<ol>
+  <li><b>3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby></b>の ワンタッチコネクターに、<span class="p">A</span> の のこりの はしと、テープの <span class="p">赤い 線</span>を さします。</li>
+  <li><b>5<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby></b>の ワンタッチコネクターに、<span class="m">B</span> の のこりの はしと、テープの <span class="m">白い 線</span>を さします。</li>
+</ol>
+<p class="small">テープ2 には A2・B2、テープ3 には A3・B3 … と、ばんごうを あわせます。</p>
+<p class="done">□ 2　□ 3　□ 4　□ 5　できた</p></div>
+
+<div class="step"><span class="num">ステップ6</span><span class="title">テープ1 と OCTO に でんきを つなぐ</span>
+<p>テープ1 は、OCTO にも でんきを わけるので、<ruby>線<rt>せん</rt></ruby>が 1<ruby>本<rt>ほん</rt></ruby>ずつ おおく なります。</p>
+<ol>
+  <li><b>3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby></b>に、<span class="p">A1</span> の のこりの はし・テープ1 の <span class="p">赤い 線</span>・<span class="p">C</span> を さします。</li>
+  <li><b>5<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby></b>に、<span class="m">B1</span> の のこりの はし・テープ1 の <span class="m">白い 線</span>・<span class="m">D</span> を さします。</li>
+  <li><span class="p">C</span> の もう かたほうを OCTO の <b>POWER の 右（＋）</b>に、<span class="m">D</span> を <b>POWER の 左（－）</b>に さして、ねじを しめます。</li>
+</ol>
+<p class="small">OCTO は つかう でんきが すくないので、アダプター1 から わけても だいじょうぶです。</p>
+<p class="done">□ できた</p></div>
+
+<div class="step"><span class="num">ステップ7</span><span class="title">ギフトコネクターを OCTO に つなぐ（2<ruby>個<rt>こ</rt></ruby>）</span>
+<p>テープの はこに 入っていた <b>ギフト3ピンコネクター</b>（<ruby>線<rt>せん</rt></ruby>の さきが はだかの もの）を 2<ruby>個<rt>こ</rt></ruby> つかいます。</p>
+<ol>
+  <li>1<ruby>個<rt>こ</rt></ruby>めの <span class="d">みどりの 線</span>を <b>ポート1 の 左から2つめ（DATA）</b>、<span class="m">白い 線</span>を <b>ポート1 の 左はし（V－）</b>に さして、ねじを しめます。</li>
+  <li>2<ruby>個<rt>こ</rt></ruby>めの <span class="d">みどり</span>を <b>ポート2 の DATA</b>、<span class="m">白</span>を <b>ポート2 の V－</b>に さして、ねじを しめます。</li>
+  <li>どちらも <b>赤い 線は つかいません</b>。さきを ビニールテープで ぐるぐる まきます。</li>
+</ol>
+<p class="done">□ ポート1　□ ポート2　できた</p></div>
+
+<div class="step"><span class="num">ステップ8</span><span class="title">OCTO と テープ1・テープ4 を つなぐ</span>
+<ol>
+  <li>ポート1 の ギフトコネクターを、<b>テープ1 の 入力側の メスコネクター</b>に さします。</li>
+  <li>ポート2 の ギフトコネクターを、<b>テープ4 の 入力側の メスコネクター</b>に さします。</li>
+</ol>
+<p class="small">さす まえに、みどりの 線どうしが つながる むきか、見て たしかめましょう。</p>
+<p class="done">□ テープ1　□ テープ4　できた</p></div>
+
+<div class="step"><span class="num">ステップ9</span><span class="title">ジャンパーを 3<ruby>本<rt>ほん</rt></ruby> つくる</span>
+<p><b>ジャンパー</b>は、まえの テープから つぎの テープへ、<b>しんごう（みどり）と －（白）だけ</b>を わたす みじかい <ruby>線<rt>せん</rt></ruby>です。3ピン コネクターの オス・メス セットで つくります。</p>
+<ol>
+  <li>メスの コネクターと オスの コネクターを 1<ruby>個<rt>こ</rt></ruby>ずつ よういします。</li>
+  <li>3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby>の ワンタッチコネクター 1<ruby>個<rt>こ</rt></ruby>に、<span class="d">みどりと みどり</span>を さします。</li>
+  <li>べつの 3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby> 1<ruby>個<rt>こ</rt></ruby>に、<span class="m">白と 白</span>を さします。</li>
+  <li><b>赤と 赤は つなぎません。</b>どちらの 赤も、さきを ビニールテープで まきます。</li>
+  <li>おなじものを、ぜんぶで <b>3<ruby>本<rt>ほん</rt></ruby></b> つくります。</li>
+</ol>
+<div class="note warn"><b>ちゅうい：</b>テープどうしの コネクターを <b>じかに さしては いけません</b>。かたちは あいますが、赤い 線で アダプターどうしが つながって しまいます。かならず ジャンパーを あいだに 入れます。</div>
+<p class="done">□ 1<ruby>本<rt>ほん</rt></ruby>め　□ 2<ruby>本<rt>ほん</rt></ruby>め　□ 3<ruby>本<rt>ほん</rt></ruby>め　できた</p></div>
+
+<div class="step"><span class="num">ステップ10</span><span class="title">テープどうしを ジャンパーで つなぐ</span>
+<ol>
+  <li>テープ1 の <b>出力側の オス</b>に ジャンパーの <b>メス</b>を さし、ジャンパーの <b>オス</b>を テープ2 の <b>入力側の メス</b>に さします。</li>
+  <li>おなじように、テープ2 → テープ3 を つなぎます。</li>
+  <li>おなじように、テープ4 → テープ5 を つなぎます。</li>
+</ol>
+<p class="small">テープ3 と テープ4 は つなぎません（テープ4 は OCTO の ポート2 から しんごうを もらいます）。</p>
+<p class="done">□ 1→2　□ 2→3　□ 4→5　できた</p></div>
+
+<div class="step"><span class="num">ステップ11</span><span class="title">出力側の 赤と白の <ruby>線<rt>せん</rt></ruby>を まく</span>
+<p>テープの <b>出力側</b>にも、赤と白の <ruby>線<rt>せん</rt></ruby>が 出ています（3ページの しゃしん）。ここにも でんきが きているので、さきが ほかの ものに さわらないように します。</p>
+<ol>
+  <li>テープ1〜5 の 出力側の <span class="p">赤</span>と <span class="m">白</span>の さきを、1<ruby>本<rt>ほん</rt></ruby>ずつ ビニールテープで まきます。</li>
+  <li>赤と 白を くっつけて まいては いけません。べつべつに まきます。</li>
+</ol>
+<p class="done">□ 1　□ 2　□ 3　□ 4　□ 5　できた</p></div>
+
+<!-- ================================================================ -->
+<h2>5. さいごの チェック</h2>
+<div class="step"><span class="num">ステップ12</span><span class="title">ぜんぶ たしかめる</span>
+<ul class="check">
+  <li>アダプター5<ruby>個<rt>こ</rt></ruby>とも、赤い ボタンに A、黒い ボタンに B が 入っている</li>
+  <li>3<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby>（＋）には 赤い 線と A だけ、5<ruby>本<rt>ほん</rt></ruby><ruby>用<rt>よう</rt></ruby>（－）には 白い 線と B だけが 入っている</li>
+  <li>OCTO の POWER の 右に C（＋）、左に D（－）が 入っている</li>
+  <li>OCTO の ポート1・ポート2 に、みどり（DATA）と 白（V－）が 入っている</li>
+  <li>ワンタッチコネクターの レバーが ぜんぶ 下がっていて、ひっぱっても ぬけない</li>
+  <li>つかわない 赤い 線（ギフトコネクター・ジャンパー）と、出力側の 赤・白の 線の さきが、ぜんぶ まいてある</li>
+  <li>テープどうしは、かならず ジャンパーで つながっている（じかに さしていない）</li>
+  <li>はだかの どうせんどうしが さわっていない</li>
+</ul>
+<p class="done">□ ぜんぶ OK</p></div>
+
+<div class="step"><span class="num">ステップ13</span><span class="title">おとなの人に 見てもらう</span>
+<p>ステップ12 の チェックを、おとなの人にも もういちど 見てもらいます。</p>
+<p class="done">□ 見てもらった</p></div>
+
+<div class="step"><span class="num">ステップ14</span><span class="title">でんきを 入れる</span>
+<div class="adult">ここからは おとなの人と いっしょに やります。</div>
+<ol>
+  <li>でんげんタップの スイッチを きって（OFF に して）おきます。</li>
+  <li>アダプター5<ruby>個<rt>こ</rt></ruby>の コンセントを、でんげんタップに さします。</li>
+  <li>でんげんタップを かべの コンセントに さして、スイッチを 入れます（ON）。</li>
+  <li>OCTO の ランプが つけば OK です。<b>テープは まだ 光りません</b>（しんごうが まだ ないから）。</li>
+</ol>
+<p class="small">へんな におい・あつい・けむりが あったら、すぐに でんげんタップの スイッチを きります。</p>
+<p class="done">□ できた</p></div>
+
+<!-- ================================================================ -->
+<h2 class="pb">6. パソコンの せってい（おとなの人が やります）</h2>
+<div class="tech">
+<p>ここからは、OCTO と TouchDesigner の せっていです。おとなの人が やります。</p>
+
+<h3>6-1. PC と OCTO をつなぐ</h3>
+<ol>
+  <li>LANケーブルで、PC と OCTO の <b>ETHERNET IN</b> を直接つなぎます。</li>
+  <li>PC の有線 LAN の IP アドレスを手動で設定します：<b>IP 192.168.0.20</b>／<b>サブネットマスク 255.255.255.0</b><br>
+  <span class="small">Windows：設定 → ネットワークとインターネット → イーサネット → IP 割り当ての「編集」→「手動」→ IPv4 をオン</span></li>
+  <li>ブラウザ（Chrome 推奨）で <b>192.168.0.10</b> を開きます。「保護されていない通信」と出ますが、そのまま進みます。開けないときは ENTTEC の無料ソフト <b>EMU</b> で OCTO を探します。</li>
+</ol>
+<div class="fig" style="width:95mm"><img src="img/octo_ethernet.jpg" alt="OCTO の LAN 端子"><div class="cap">ETHERNET IN に LAN ケーブルを差します。RESET / IDENTIFY ボタンは使いません（押したまま電源を入れると、ネットワーク設定が初期化されます）。</div></div>
+
+<h3>6-2. OCTO の設定</h3>
+<table>
+  <tr><th style="width:36%">場所</th><th style="width:22%">項目</th><th style="width:21%">ポート1</th><th>ポート2</th></tr>
+  <tr><td>Settings → Pixel Mapping Options</td><td>Input Protocol</td><td colspan="2"><b>Art-Net</b>（初期値のまま）</td></tr>
+  <tr><td>Settings → Output Settings</td><td>LED Protocol</td><td><b>WS2811</b></td><td><b>WS2811</b></td></tr>
+  <tr><td>Settings → Output Settings</td><td>Mapped Pixels</td><td><b>300</b>（テープ1〜3）</td><td><b>200</b>（テープ4〜5）</td></tr>
+  <tr><td>Settings → Output Settings</td><td>開始ユニバース</td><td><b>0</b></td><td><b>2</b></td></tr>
+</table>
+<p>最後に <b>Save</b> を押します。1ユニバースに入るのは RGB で170ピクセルまでなので、ポート1 はユニバース 0・1、ポート2 は 2・3 を使います（OCTO が続きを自動で使います）。初期設定は WS2812B なので、必ず WS2811 に変えてください。</p>
+
+<h3>6-3. TouchDesigner から点灯</h3>
+<p>500ピクセル × RGB = 1,500 サンプル を作り、4つのユニバースに分けて送ります。</p>
+<table>
+  <tr><th style="width:26%">オペレーター</th><th style="width:30%">パラメーター</th><th>設定値</th></tr>
+  <tr><td><b>Pattern CHOP</b></td><td>Length</td><td><b>1500</b></td></tr>
+  <tr><td><b>Math CHOP</b></td><td>Range タブ</td><td>From Range -1〜1 → To Range <b>0〜255</b></td></tr>
+  <tr><td><b>Trim CHOP</b> × 4</td><td>範囲（単位はサンプル）</td><td>0〜509／510〜899／900〜1409／1410〜1499</td></tr>
+  <tr><td rowspan="5"><b>DMX Out CHOP</b> × 4</td><td>Interface</td><td><b>Art-Net</b></td></tr>
+  <tr><td>Network Address</td><td><b>192.168.0.10</b></td></tr>
+  <tr><td>Net／Subnet</td><td><b>0／0</b></td></tr>
+  <tr><td>Universe</td><td>上の Trim の順に <b>0／1／2／3</b></td></tr>
+  <tr><td>Format／Rate</td><td><b>Packet Per Channel</b>／<b>44</b> 以下</td></tr>
+</table>
+<ul>
+  <li>テープに色の波が出れば成功です。サンプル 0・1・2 が1つ目のピクセルの R・G・B です。</li>
+  <li>色の順番が違うときは、OCTO の設定で色の並び（RGB／GRB など）を変えます。</li>
+  <li>白の最大輝度（すべて 255）は、5m あたりアダプターの容量（60W）を超えるおそれがあります。長時間つけるときは明るさを抑えます。</li>
+</ul>
+</div>
+
+<!-- ================================================================ -->
+<h2>7. こまったときは</h2>
+<table>
+  <tr><th style="width:36%">こんなとき</th><th>こうする</th></tr>
+  <tr><td>OCTO の ランプが つかない</td><td>ステップ6（C と D）と、アダプター1 の ボタンの <ruby>線<rt>せん</rt></ruby>を たしかめる。</td></tr>
+  <tr><td>OCTO は つくけど、テープが ぜんぶ 光らない</td><td>おとなの人に、6章の せってい（WS2811・Save）を たしかめて もらう。</td></tr>
+  <tr><td>テープ1〜3（または 4〜5）だけ 光らない</td><td>ステップ7・8 の ポート1（または ポート2）の みどりと 白を たしかめる。</td></tr>
+  <tr><td>テープの とちゅうから さき が 光らない</td><td>光らなく なった テープの まえの ジャンパー（ステップ10）を たしかめる。みどりと 白が つながっているか 見る。</td></tr>
+  <tr><td>1<ruby>本<rt>ほん</rt></ruby>だけ ぜんぶ 光らない・くらい</td><td>その テープの アダプター（ステップ4・5）を たしかめる。</td></tr>
+  <tr><td>いろが ちがう</td><td>こわれて いません。おとなの人に、OCTO の いろの じゅんばんを かえて もらう。</td></tr>
+  <tr><td>あつい・へんな におい</td><td>すぐに でんげんタップの スイッチを きって、おとなの人に しらせる。</td></tr>
+</table>
 
 <p class="foot">VFX照明制作 ／ LEDテープ組立説明書　　販売ページの画像（テープ付属品・端子・配電配線図）は BTF-LIGHTING より</p>
 
