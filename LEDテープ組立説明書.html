@@ -42,7 +42,7 @@
 
 <h1>LEDテープ 組立説明書</h1>
 <p class="lead">BTF-LIGHTING WS2811 DC12V LEDテープ（5m・60LEDs/m）／ ENTTEC OCTO MK3 ／ 海渡電子 ACアダプター 12V 5A<br>
-テープ1本を組み立てて点灯させ、そのあと複数本へ広げる手順です。</p>
+テープ1本を組み立て、OCTO を設定し、TouchDesigner から点灯させる手順です。そのあと複数本へ広げます。</p>
 
 <div class="note warn"><b>はじめに：</b>このLEDテープは、電源をつなぐだけでは点灯しません。各LEDに「何色で光るか」という信号（データ）が必要です。信号は <b>OCTO MK3</b> から送ります。ENTTEC DMX USB PRO は照明器具用の DMX 信号を出す機器なので、このテープを直接光らせることはできません。</div>
 
@@ -101,7 +101,7 @@
     <table>
       <tr><th style="width:42%">ETHERNET IN</th><td>PC やネットワークにつなぐ LAN 端子。設定や TouchDesigner からの制御に使います</td></tr>
       <tr><th>THROUGH</th><td>次の機器へ LAN をつなぐ端子。今回は使いません</td></tr>
-      <tr><th>RESET / IDENTIFY</th><td>点灯テスト用のボタン</td></tr>
+      <tr><th>RESET / IDENTIFY</th><td>今回は使いません。押したまま電源を入れると、ネットワーク設定が工場出荷時に戻ります</td></tr>
     </table>
   </div>
 </div>
@@ -165,17 +165,58 @@
   <li>むき出しの銅線どうしが触れ合っていない</li>
 </ul>
 
-<h2>5. 点灯確認</h2>
-<ol>
-  <li>ACアダプターをコンセントに差します。OCTO のランプが点灯します。</li>
-  <li>OCTO 本体の <b>RESET / IDENTIFY ボタン</b>を<b>短く</b>押します。</li>
-  <li>すべての出力が最大値になり、テープが<b>約10秒間、白く光れば</b>組立は成功です。10秒後に元の状態に戻ります。</li>
-</ol>
-<div class="note warn"><b>注意：</b>ボタンを押したまま電源を入れると、ネットワーク設定が工場出荷時に戻ります。ボタンは電源が入ってから短く押してください。<br>
-テストは白の最大輝度なので、5m だとアダプターの容量（60W）に近くなります。10秒で戻るので問題ありませんが、白の最大輝度で長時間つけっぱなしにはしないでください。<br>
-OCTO の初期設定は WS2812B 用です。テープが光らないときや、色や光り方がおかしいときは、7章の手順で <b>WS2811</b> に設定してください。</div>
+<h2>5. OCTO の設定（PC から）</h2>
+<p>OCTO は初期設定が WS2812B 用になっているので、最初に一度、このテープ（WS2811）に合わせて設定します。設定は OCTO 本体に保存されるので、次からは不要です。</p>
 
-<h2>6. 2本目以降をつなぐ</h2>
+<h3>5-1. PC と OCTO をつなぐ</h3>
+<ol>
+  <li>ACアダプターをコンセントに差します。OCTO のランプが点灯します。テープはまだ光りません。</li>
+  <li>LAN ケーブルで、PC と OCTO の <b>ETHERNET IN</b> を直接つなぎます。</li>
+  <li>PC の有線 LAN の IP アドレスを、手動で次のように設定します。<br>
+    <b>IP アドレス：192.168.0.20</b>　<b>サブネットマスク：255.255.255.0</b><br>
+    <span style="font-size:9.5pt">Windows：設定 → ネットワークとインターネット → イーサネット → IP 割り当ての「編集」→「手動」→ IPv4 をオン</span></li>
+</ol>
+<p style="font-size:9.5pt">OCTO は初期設定で DHCP ですが、ルーターがない環境では <b>192.168.0.10</b> になります。ルーターにつなぐ場合は、ルーターが割り当てた IP を使います。</p>
+
+<h3>5-2. 設定画面を開く</h3>
+<ol>
+  <li>ブラウザ（Chrome 推奨）のアドレス欄に <b>192.168.0.10</b> と入力します。</li>
+  <li>「保護されていない通信」と表示されますが、そのまま進んで問題ありません。</li>
+</ol>
+<p style="font-size:9.5pt">開けないときは、ENTTEC の無料ソフト <b>EMU</b> を使うと、ネットワーク上の OCTO を探して設定画面を開けます。</p>
+
+<h3>5-3. テープに合わせて設定する</h3>
+<table>
+  <tr><th style="width:40%">場所</th><th style="width:28%">項目</th><th>設定値</th></tr>
+  <tr><td>Settings → Pixel Mapping Options</td><td>Input Protocol</td><td><b>Art-Net</b>（初期値のまま）</td></tr>
+  <tr><td>Settings → Output Settings（ポート1）</td><td>LED Protocol</td><td><b>WS2811</b></td></tr>
+  <tr><td>Settings → Output Settings（ポート1）</td><td>Mapped Pixels</td><td><b>100</b></td></tr>
+  <tr><td>Settings → Output Settings（ポート1）</td><td>開始ユニバース</td><td><b>0</b></td></tr>
+</table>
+<p>最後に <b>Save</b> を押します。保存しないと反映されません。</p>
+<p style="font-size:9.5pt">100ピクセル × RGB 3チャンネル = 300チャンネルなので、テープ1本は Art-Net の<b>ユニバース1つ</b>に収まります（1ユニバースは 512チャンネル、RGB で最大170ピクセル）。</p>
+
+<h2>6. TouchDesigner から点灯する</h2>
+<p>PC と OCTO を 5章のとおりつないだまま、TouchDesigner で次の3つのオペレーターをつなぎます。</p>
+<table>
+  <tr><th style="width:24%">オペレーター</th><th style="width:28%">パラメーター</th><th>設定値</th></tr>
+  <tr><td><b>Pattern CHOP</b></td><td>Length</td><td><b>300</b>（100ピクセル × RGB）</td></tr>
+  <tr><td><b>Math CHOP</b></td><td>Range タブ</td><td>From Range <b>-1〜1</b> → To Range <b>0〜255</b></td></tr>
+  <tr><td rowspan="6"><b>DMX Out CHOP</b></td><td>Interface</td><td><b>Art-Net</b></td></tr>
+  <tr><td>Network Address</td><td><b>192.168.0.10</b>（OCTO の IP）</td></tr>
+  <tr><td>Net／Subnet／Universe</td><td><b>0／0／0</b>（OCTO の開始ユニバース 0 に合わせる）</td></tr>
+  <tr><td>Format</td><td><b>Packet Per Channel</b>（1チャンネルの 300サンプルを DMX チャンネルとして送る）</td></tr>
+  <tr><td>Rate</td><td><b>44</b> 以下</td></tr>
+  <tr><td>Active</td><td>オン</td></tr>
+</table>
+<ul>
+  <li>テープに色の波が表示されれば成功です。Pattern CHOP の値を変えると、表示も変わります。</li>
+  <li>値は <b>0〜255</b> で送ります。サンプル 0・1・2 が1つ目のピクセルの R・G・B、3・4・5 が2つ目のピクセル…と並びます。</li>
+  <li>DMX Out CHOP を<b>オフ（Active をオフ）</b>にすると、送信が止まります。</li>
+</ul>
+<div class="note warn"><b>注意：</b>白の最大輝度（すべて 255）は、5m だとアダプターの容量（60W）を超えるおそれがあります。長時間つけるときは、明るさを抑えてください。</div>
+
+<h2>7. 2本目以降をつなぐ</h2>
 <div class="fig"><img src="img/wiring_diagram.png" alt="配電配線図"><div class="cap">配電配線図（販売ページの画像）。この図は大きな電源1台から複数のテープに給電する場合です。</div></div>
 
 <p>図では、1本目の出力側の<b>データ</b>が2本目の入力側へつながり、つなぎ目ごとに電源から ＋／－ を<b>もう一度供給</b>しています。テープが長くなると電圧が下がり、先のほうが暗くなったり色が変わったりするのを防ぐためです。</p>
@@ -188,6 +229,7 @@ OCTO の初期設定は WS2812B 用です。テープが光らないときや、
   <li>OCTO MK3 の出力ポートは2つなので、この方法でつなげるのは2本までです。3本以上は、方法Bと組み合わせます。</li>
   <li>各アダプターの <span class="m">－</span> は、OCTO の <span class="m">－</span> とつないで共通にします。</li>
   <li>OCTO 本体の電源は、どれか1個のアダプターから取ります。</li>
+  <li>ポート2も 5章と同じように設定し、開始ユニバースを <b>1</b> にします。TouchDesigner では DMX Out CHOP をもう1つ作り、Universe を <b>1</b> にします。</li>
 </ul>
 
 <h3>方法B：テープを1列につなぐ</h3>
@@ -195,17 +237,23 @@ OCTO の初期設定は WS2812B 用です。テープが光らないときや、
   <li>1本目の出力側の <span class="d">Dout</span> を、2本目の入力側の <span class="d">Din</span> へつなぎます。</li>
   <li><span class="m">GND</span> もつないで、すべてのアダプターの <span class="m">－</span> を共通にします。</li>
   <li><b>アダプターどうしの <span class="p">＋</span> はつなぎません。</b>テープとテープの間の <span class="p">12V</span> はつながず、各テープには自分のアダプターからだけ ＋ を入れます。</li>
-  <li>OCTO の設定で、そのポートのピクセル数を「100 × 本数」にします。</li>
+  <li>OCTO の設定で、そのポートの Mapped Pixels を「100 × 本数」にします。</li>
+  <li>2本つなぐと 200ピクセル（600チャンネル）になり、ユニバース1つ（170ピクセル）に収まりません。OCTO は次のユニバースを自動で使うので、TouchDesigner 側もユニバースごとに DMX Out CHOP を分けて送ります。</li>
 </ul>
 
-<h2>7. 点灯しないとき</h2>
+<h2>8. 点灯しないとき</h2>
 <table>
   <tr><th style="width:32%">症状</th><th>対処</th></tr>
   <tr><td>OCTO のランプが点かない</td><td>OCTO の電源配線（線C・線D）と、DCジャックコネクターの差し込みを確認します。</td></tr>
   <tr><td>OCTO は点くが、テープが光らない</td><td>
     ① OCTO が入力側（矢印が始まる側）につながっているか確認します。<br>
     ② 緑の線がポート1の DATA（左から2番目）、白い線が V－（左端）に入っているか確認します。<br>
-    ③ PC と OCTO の <b>ETHERNET IN</b> を LAN ケーブルでつなぎ、ブラウザで OCTO の設定画面を開きます。OCTO は初期設定で DHCP なので、ルーターにつないだ場合はルーターが割り当てた IP、PC と直接つないだ場合は <b>192.168.0.10</b> です。<b>Settings → Output Settings</b> で <b>LED Protocol：WS2811</b>、<b>Mapped Pixels：100</b> にして、<b>Save</b> を押します。</td></tr>
+    ③ 5章の設定（WS2811・100ピクセル）が保存されているか確認します。</td></tr>
+  <tr><td>設定画面が開けない</td><td>PC の IP が 192.168.0.20／255.255.255.0 になっているか、LAN ケーブルが ETHERNET IN に差さっているか確認します。Wi-Fi をオフにすると通ることがあります。</td></tr>
+  <tr><td>TouchDesigner から送っても光らない</td><td>
+    ① DMX Out CHOP の Network Address が OCTO の IP、Net／Subnet／Universe が OCTO の開始ユニバースと同じか確認します。<br>
+    ② Format が Packet Per Channel になっているか確認します。<br>
+    ③ Windows のファイアウォールで TouchDesigner の通信が許可されているか確認します。</td></tr>
   <tr><td>色が指定と違う</td><td>故障ではありません。OCTO の設定画面で、色の並び順（RGB／GRB など）を変更します。</td></tr>
   <tr><td>途中から先が光らない</td><td>光らなくなった位置の直前で、データの線やつなぎ目が切れていないか確認します。</td></tr>
   <tr><td>先のほうが暗い・色が変わる</td><td>電圧不足です。つなぎ目で ＋／－ を供給し直すか、方法Aに切り替えます。</td></tr>
