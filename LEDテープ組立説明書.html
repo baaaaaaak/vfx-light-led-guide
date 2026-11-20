@@ -85,6 +85,27 @@
   </div>
 </div>
 
+<h3>OCTO MK3 の端子</h3>
+<div class="fig"><img src="img/octo_terminals.jpg" alt="OCTO MK3 の電源端子と出力端子"><div class="cap">OCTO MK3 の端子側。端子名は緑のブロックに隠れて見えにくいので、写真に書き込みました。</div></div>
+<table>
+  <tr><th style="width:30%">端子</th><th>使い方</th></tr>
+  <tr><td><b>POWER</b>（左端の2極）</td><td>OCTO 本体の電源。<span class="m">左が －</span>、<span class="p">右が ＋</span>。DC 5〜60V に対応しています</td></tr>
+  <tr><td><b>ポート1</b>（右の4極）</td><td>左から <span class="m">V－</span>・<span class="d">DATA</span>・CLK・V＋。テープ1本目はここにつなぎます</td></tr>
+  <tr><td><b>ポート2</b>（中央の4極）</td><td>ポート1と同じ並び。テープ1本だけのときは使いません</td></tr>
+</table>
+<p style="font-size:9.5pt">WS2811 テープは信号線が1本なので、<b>CLK は使いません</b>。<b>V＋ も使いません</b>（テープの電源はアダプターから直接入れます）。緑のブロックは差し込み式で、手前に引くと外れます。外すと端子名が見やすくなります。</p>
+
+<div class="row">
+  <div class="fig" style="flex:0 0 80mm"><img src="img/octo_ethernet.jpg" alt="OCTO MK3 の LAN 端子と Identify ボタン"><div class="cap">反対側の面</div></div>
+  <div class="text">
+    <table>
+      <tr><th style="width:42%">ETHERNET IN</th><td>PC やネットワークにつなぐ LAN 端子。設定や TouchDesigner からの制御に使います</td></tr>
+      <tr><th>THROUGH</th><td>次の機器へ LAN をつなぐ端子。今回は使いません</td></tr>
+      <tr><th>RESET / IDENTIFY</th><td>点灯テスト用のボタン</td></tr>
+    </table>
+  </div>
+</div>
+
 <h2>3. テープ1本の組立</h2>
 <div class="note warn"><b>重要：</b>配線が終わるまで、ACアダプターはコンセントに差さないでください。</div>
 
@@ -103,27 +124,42 @@
 <h3>3-3. －側をつなぐ（5本用コネクター）</h3>
 <ol>
   <li>DCジャックコネクターの <span class="m">－</span> に線B を差します。</li>
-  <li>5本用コネクターに、<span class="m">線B</span>・テープの<span class="m">白い電圧付加ワイヤ</span>・OCTO へ行く<span class="m">線D</span>・ギフトコネクターの<span class="m">白い線（GND）</span> を差します。</li>
+  <li>5本用コネクターに、<span class="m">線B</span>・テープの<span class="m">白い電圧付加ワイヤ</span>・OCTO へ行く<span class="m">線D</span> を差します。</li>
 </ol>
 
 <h3>3-4. OCTO につなぐ</h3>
 <ol>
-  <li><span class="p">線C</span> を OCTO の POWER 端子の <span class="p">＋</span> に、<span class="m">線D</span> を <span class="m">－</span> に、ドライバーで固定します。</li>
-  <li>ギフトコネクターの<span class="d">緑の線（データ）</span>を、OCTO の出力ポート1の <span class="d">DATA</span> 端子に固定します。</li>
-  <li>ギフトコネクターの<b>赤い線は使いません</b>。先端をビニールテープで巻き、他の金属に触れないようにします。</li>
+  <li><span class="p">線C</span> を POWER の<span class="p">右（＋）</span>に、<span class="m">線D</span> を POWER の<span class="m">左（－）</span>に差し、上のネジをドライバーで締めます。</li>
+  <li>ギフトコネクターの<span class="d">緑の線（データ）</span>を、ポート1の<span class="d">左から2番目（DATA）</span>に固定します。</li>
+  <li>ギフトコネクターの<span class="m">白い線（GND）</span>を、ポート1の<span class="m">左端（V－）</span>に固定します。</li>
+  <li>ギフトコネクターの<b>赤い線は使いません</b>。先端をビニールテープで巻き、他の金属に触れないようにします。ポート1の CLK と V＋ には何もつなぎません。</li>
   <li>ギフトコネクターを、テープ入力側のメスコネクターに差し込みます。</li>
 </ol>
 
 <div class="note"><b>なぜ赤い線を使わないのか：</b>電源は太い電圧付加ワイヤからだけ入れます。コネクターの細い線に大きな電流が流れないようにするためです。<br>
 <b>差す前に確認：</b>ギフトコネクターをテープのメスコネクターにはめてみて、<span class="d">緑どうし</span>がつながることを確かめてください。製品によって並び順が違う場合があります。</div>
 
-<p style="font-size:9.5pt">ワンタッチコネクターの使い方：レバーを上げる → 電線を奥まで差す → レバーを下げる。軽く引っ張って抜けなければ OK です。</p>
+<div class="row">
+  <div class="fig" style="flex:0 0 80mm"><img src="img/connector_lever.jpg" alt="ワンタッチコネクターのレバー"><div class="cap">ワンタッチコネクター</div></div>
+  <div class="text">
+    <p><b>ワンタッチコネクターの使い方</b></p>
+    <ol>
+      <li>青いレバーを上げます。</li>
+      <li>被覆をむいた電線を、奥まで差し込みます。</li>
+      <li>レバーを下げて固定します。</li>
+      <li>軽く引っ張って、抜けなければ OK です。</li>
+    </ol>
+    <p style="font-size:9.5pt">同じコネクターに差した電線どうしは、すべてつながります。使わない差し込み口は空けたままでかまいません。</p>
+  </div>
+</div>
+<p style="font-size:9.5pt">OCTO からテープまでのデータ線（ギフトコネクターの線）は、<b>3m 以内</b>にしてください。</p>
 
 <h2>4. 電源を入れる前のチェック</h2>
 <ul class="check">
   <li>＋ と － が入れ替わっていない（赤い線どうし・白い線どうしが同じコネクターにある）</li>
   <li>ワンタッチコネクターのレバーがすべて下がり、電線を軽く引いても抜けない</li>
-  <li>緑の線が OCTO の DATA 端子に入っている（POWER 端子ではない）</li>
+  <li>緑の線がポート1の DATA、白い線がポート1の V－ に入っている（POWER 端子ではない）</li>
+  <li>POWER の左が －（線D）、右が ＋（線C）になっている</li>
   <li>使わない赤い線の先端が絶縁されている</li>
   <li>OCTO は入力側（矢印が始まる側）につながっている</li>
   <li>むき出しの銅線どうしが触れ合っていない</li>
@@ -132,11 +168,12 @@
 <h2>5. 点灯確認</h2>
 <ol>
   <li>ACアダプターをコンセントに差します。OCTO のランプが点灯します。</li>
-  <li>OCTO 本体の <b>Identify / Reset ボタン</b>を<b>短く</b>押します。</li>
-  <li>テープにテストパターンが表示されれば、組立は成功です。</li>
+  <li>OCTO 本体の <b>RESET / IDENTIFY ボタン</b>を<b>短く</b>押します。</li>
+  <li>すべての出力が最大値になり、テープが<b>約10秒間、白く光れば</b>組立は成功です。10秒後に元の状態に戻ります。</li>
 </ol>
-<div class="note warn"><b>注意：</b>ボタンを長押しすると、設定の初期化になる場合があります。短く押してください。<br>
-最初の確認は、白の最大輝度で長時間つけっぱなしにしないでください。5m を白で最大に光らせると、アダプターの容量（60W）を超えるおそれがあります。</div>
+<div class="note warn"><b>注意：</b>ボタンを押したまま電源を入れると、ネットワーク設定が工場出荷時に戻ります。ボタンは電源が入ってから短く押してください。<br>
+テストは白の最大輝度なので、5m だとアダプターの容量（60W）に近くなります。10秒で戻るので問題ありませんが、白の最大輝度で長時間つけっぱなしにはしないでください。<br>
+OCTO の初期設定は WS2812B 用です。テープが光らないときや、色や光り方がおかしいときは、7章の手順で <b>WS2811</b> に設定してください。</div>
 
 <h2>6. 2本目以降をつなぐ</h2>
 <div class="fig"><img src="img/wiring_diagram.png" alt="配電配線図"><div class="cap">配電配線図（販売ページの画像）。この図は大きな電源1台から複数のテープに給電する場合です。</div></div>
@@ -146,8 +183,9 @@
 <p>今回は<b>テープ1本ごとに 12V 5A のアダプターを1個</b>使います。つなぎ方は次の2通りです。</p>
 
 <h3>方法A：テープごとに OCTO の別のポートへつなぐ（おすすめ）</h3>
-<p>テープ1本ずつ、3章の手順で組み立て、緑の線をそれぞれ OCTO の別の出力ポートの DATA につなぎます。配線が単純で、どこかが光らないときも原因を探しやすい方法です。</p>
+<p>テープ1本ずつ、3章の手順で組み立て、緑の線と白い線をそれぞれ OCTO の別の出力ポートの DATA と V－ につなぎます。配線が単純で、どこかが光らないときも原因を探しやすい方法です。</p>
 <ul>
+  <li>OCTO MK3 の出力ポートは2つなので、この方法でつなげるのは2本までです。3本以上は、方法Bと組み合わせます。</li>
   <li>各アダプターの <span class="m">－</span> は、OCTO の <span class="m">－</span> とつないで共通にします。</li>
   <li>OCTO 本体の電源は、どれか1個のアダプターから取ります。</li>
 </ul>
@@ -166,8 +204,8 @@
   <tr><td>OCTO のランプが点かない</td><td>OCTO の電源配線（線C・線D）と、DCジャックコネクターの差し込みを確認します。</td></tr>
   <tr><td>OCTO は点くが、テープが光らない</td><td>
     ① OCTO が入力側（矢印が始まる側）につながっているか確認します。<br>
-    ② 緑の線が DATA 端子に入っているか確認します。<br>
-    ③ PC と LAN ケーブルでつなぎ、ブラウザで OCTO の設定画面（初期 IP：<b>192.168.0.10</b>）を開いて、<b>プロトコル：WS2811／ピクセル数：100</b> に設定します。</td></tr>
+    ② 緑の線がポート1の DATA（左から2番目）、白い線が V－（左端）に入っているか確認します。<br>
+    ③ PC と OCTO の <b>ETHERNET IN</b> を LAN ケーブルでつなぎ、ブラウザで OCTO の設定画面を開きます。OCTO は初期設定で DHCP なので、ルーターにつないだ場合はルーターが割り当てた IP、PC と直接つないだ場合は <b>192.168.0.10</b> です。<b>Settings → Output Settings</b> で <b>LED Protocol：WS2811</b>、<b>Mapped Pixels：100</b> にして、<b>Save</b> を押します。</td></tr>
   <tr><td>色が指定と違う</td><td>故障ではありません。OCTO の設定画面で、色の並び順（RGB／GRB など）を変更します。</td></tr>
   <tr><td>途中から先が光らない</td><td>光らなくなった位置の直前で、データの線やつなぎ目が切れていないか確認します。</td></tr>
   <tr><td>先のほうが暗い・色が変わる</td><td>電圧不足です。つなぎ目で ＋／－ を供給し直すか、方法Aに切り替えます。</td></tr>
@@ -176,7 +214,7 @@
 
 <div class="note"><b>安全について：</b>作業する電線は、すべてアダプターを通した 12V なので感電の危険はほとんどありません。ただし、配線を変えるときは必ずコンセントを抜いてから行ってください。</div>
 
-<p class="foot">VFX照明制作 ／ LEDテープ組立説明書　　画像はすべて BTF-LIGHTING の販売ページより</p>
+<p class="foot">VFX照明制作 ／ LEDテープ組立説明書　　テープの画像と配電配線図は BTF-LIGHTING の販売ページより</p>
 
 </body>
 </html>
